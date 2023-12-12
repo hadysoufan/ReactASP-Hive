@@ -48,23 +48,29 @@ git clone https://github.com/yourusername/yourproject.git
 # Run the project
 ``` dotnet run ```
 
-Project Structure
-Explanation of the project structure, key files, and their purposes.
+## Project Structure
 
-API: Contains controllers and middleware for handling API requests.
-Application: Houses application logic and use case implementations.
-Domain: Defines domain models and entities.
-Persistence: Manages data access and the database context.
-Application.Core: Shared core functionality used across the application.
-Usage
-Provide examples or usage scenarios for your project. Include code snippets if necessary.
+The project is organized into several key directories, each serving a specific purpose:
 
-API Endpoints
-Document the available API endpoints and their purposes.
+- **API**: This directory contains controllers and middleware responsible for handling API requests. Controllers define the API endpoints, while middleware handles tasks such as exception handling and logging.
 
-GET /api/activities: Get a list of activities.
-GET /api/activities/{id}: Get details of a specific activity by ID.
-POST /api/activities: Create a new activity.
-PUT /api/activities/{id}: Edit an existing activity by ID.
-DELETE /api/activities/{id}: Delete an activity by ID.
-Configuration
+- **Application**: The `Application` directory houses the application logic and use case implementations. Here, you'll find the core functionality that processes and orchestrates business logic.
+
+- **Domain**: The `Domain` directory is dedicated to defining domain models and entities. These models represent the core business entities and their relationships, providing a conceptual framework for the application.
+
+- **Persistence**: In the `Persistence` directory, you'll find code related to data access and the database context. This includes the Entity Framework Core configurations, migrations, and the database context class.
+
+- **Application.Core**: This directory contains shared core functionality that is used across the application. It might include utility classes, extension methods, or other shared components.
+
+
+## API Endpoints
+
+The API exposes the following endpoints:
+
+- **GET /api/activities**: Retrieve a list of activities.
+- **GET /api/activities/{id}**: Retrieve details of a specific activity by its unique ID.
+- **POST /api/activities**: Create a new activity.
+- **PUT /api/activities/{id}**: Edit an existing activity by specifying its ID.
+- **DELETE /api/activities/{id}**: Delete an activity using its ID.
+
+These endpoints allow users to interact with the application, perform CRUD operations on activities, and retrieve relevant information.
