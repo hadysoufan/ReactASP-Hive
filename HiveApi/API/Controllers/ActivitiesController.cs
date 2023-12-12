@@ -4,19 +4,23 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    /// <summary>
+    /// Controller for managing activities.
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     public class ActivitiesController : BaseApiController
     {
 
+        /// <inheritdoc />
         // GET: api/activities
-        /// <summary>
         [HttpGet]
         public async Task<IActionResult> GetActivities()
         {
             return HandleResult(await Mediator.Send(new List.Query()));
         }
 
+        /// <inheritdoc />
         // GET: api/activities/{id}
         [HttpGet("{id}")]
         public async Task<IActionResult> GetActivity(Guid id)
@@ -25,13 +29,16 @@ namespace API.Controllers
 
         }
 
-        // Post: api/create-activity
+        /// <inheritdoc />
+        // Post: api/activities
         [HttpPost]
         public async Task<IActionResult> CreateActivity(Activity activity)
         {
             return HandleResult(await Mediator.Send(new Create.Command { Activity = activity }));
         }
 
+        /// <inheritdoc />
+        // Edit: api/activities/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> EditActivity(Guid id, Activity activity)
         {
@@ -39,6 +46,8 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Edit.Command { Activity = activity })); 
         }
 
+        /// <inheritdoc />
+        // Delete: api/activities/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteActivity(Guid id)
         {
