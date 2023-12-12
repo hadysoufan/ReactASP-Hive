@@ -1,10 +1,6 @@
-using Domain;
+using Application.Activities;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace API.Controllers
 {
@@ -12,33 +8,41 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class ActivitiesController : BaseApiController
     {
-        private readonly DataContext _context;
-
-        public ActivitiesController(DataContext context)
-        {
-            _context = context;
-        }
 
         // GET: api/activities
+        /// <summary>
         [HttpGet]
-        public async Task<ActionResult<List<Activity>>> GetActivities()
+        public async Task<IActionResult> GetActivities()
         {
-            var activities = await _context.Activities.ToListAsync();
-            return activities;
+            return HandleResult(await Mediator.Send(new List.Query()));
         }
 
         // GET: api/activities/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Activity>> GetActivity(Guid id)
+        public async Task<IActionResult> GetActivity(Guid id)
         {
-            var activity = await _context.Activities.FindAsync(id);
+           return HandleResult(await Mediator.Send(new Details.Query { Id = id }));
 
-            if (activity == null)
-            {
-                return NotFound();
-            }
+        }
 
-            return activity;
+        // Post: api/create-activity
+        [HttpPost]
+        public async Task<IActionResult> CreateActivity(Activity activity)
+        {
+            return HandleResult(await Mediator.Send(new Create.Command { Activity = activity }));
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditActivity(Guid id, Activity activity)
+        {
+            activity.Id = id;
+            return HandleResult(await Mediator.Send(new Edit.Command { Activity = activity })); 
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteActivity(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new Delete.Command { Id = id }));
         }
     }
 }
