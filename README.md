@@ -1,10 +1,11 @@
-# Hive
+# Hive Social Network Platform
 
 A social network platform using RwactJs for client side and ASP Core Web API 8 for backend
 
 ## Table of Contents
 
 - [Introduction](#introduction)
+- [Purpose](#purpose)
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
@@ -16,11 +17,14 @@ A social network platform using RwactJs for client side and ASP Core Web API 8 f
 
 ## Introduction
 
-Brief introduction about your project, its purpose, and key features.
+Welcome to Hive, a robust social network platform designed to connect people and facilitate meaningful interactions. Hive provides a comprehensive set of features, including user authentication, profile management, posting, following, comments, private messaging, events, and a marketplace. Whether you're looking to share updates, connect with friends, or explore new opportunities, Hive is your go-to social hub.
+
+## Purpose
+Hive aims to create a vibrant and interconnected community where users can express themselves, build relationships, and discover exciting opportunities. Our platform is built on the principles of inclusivity, security, and user-friendly design to ensure a seamless and enjoyable experience for all.
 
 ## Prerequisites
 
-List of prerequisites or dependencies required to run the project. Include links to installation guides if needed.
+List of prerequisites or dependencies required to run the project.
 
 - [.NET SDK](https://dotnet.microsoft.com/download)
 - [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/)
