@@ -111,3 +111,9 @@ These endpoints allow users to interact with the appuser entity, perform CRUD op
   
 These endpoints allow users to interact with the photo entity, perform CRUD operations on photos, and retrieve relevant information.
 
+## 5. Profile Controller
+- **GET /api/profile/{username}**: Get a specific user profile by the id. 
+  
+These endpoints allow users to interact with the user entity, perform CRUD operations on user profile, and retrieve relevant information.
+
+
