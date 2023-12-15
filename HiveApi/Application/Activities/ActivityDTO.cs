@@ -20,6 +20,6 @@ namespace Application.Activities
         /// <summary>
         /// Gets or sets the collection of profiles representing attendees of the activity.
         /// </summary>
-        public ICollection<Profile> Attendees { get; set; }
+        public ICollection<AttendeeDTO> Attendees { get; set; }
     }
 }
