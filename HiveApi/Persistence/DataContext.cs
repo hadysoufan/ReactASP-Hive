@@ -33,6 +33,11 @@ namespace Persistence
         public DbSet<Photo> Photos { get; set; }
 
         /// <summary>
+        /// Gets or sets the DbSet for posts.
+        /// </summary>
+        public DbSet<Post> Posts { get; set; }
+
+        /// <summary>
         /// Configures the relationships and keys for the entities.
         /// </summary>
         /// <param name="builder">The model builder.</param>
