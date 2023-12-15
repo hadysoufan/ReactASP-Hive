@@ -47,7 +47,7 @@ git clone https://github.com/hadysoufan/ReactASP-Hive.git
 ```
 
 # Navigate to the project directory
-``` cd yourproject ```
+``` cd API ```
 
 # Restore dependencies
 ``` dotnet restore ```
