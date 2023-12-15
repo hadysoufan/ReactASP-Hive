@@ -83,11 +83,14 @@ The API exposes the following endpoints:
 - **POST /api/activities**: Create a new activity.
 - **PUT /api/activities/{id}**: Edit an existing activity by specifying its ID.
 - **DELETE /api/activities/{id}**: Delete an activity using its ID.
-
+  
+These endpoints allow users to interact with the application, perform CRUD operations on activities, and retrieve relevant information.
 - **GET /api/post**: Retrieve a list of posts.
 - **GET /api/post/{id}**: Retrieve details of a specific post by its unique ID.
 - **POST /api/post**: Create a new post.
 - **PUT /api/post/{id}**: Edit an existing post by specifying its ID.
 - **DELETE /api/post/{id}**: Delete an post using its ID.
 
-These endpoints allow users to interact with the application, perform CRUD operations on activities, and retrieve relevant information.
+  These endpoints allow users to interact with the posts, perform CRUD operations on posts, and retrieve relevant information.
+
+
