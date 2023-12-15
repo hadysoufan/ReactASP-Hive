@@ -28,6 +28,11 @@ namespace Persistence
         public DbSet<ActivityAttendee> ActivityAttendees { get; set; }
 
         /// <summary>
+        /// Gets or sets the DbSet for photos.
+        /// </summary>
+        public DbSet<Photo> Photos { get; set; }
+
+        /// <summary>
         /// Configures the relationships and keys for the entities.
         /// </summary>
         /// <param name="builder">The model builder.</param>
