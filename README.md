@@ -43,7 +43,7 @@ Instructions on how to set up and run the project on a local machine.
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/yourproject.git
+git clone [https://github.com/yourusername/yourproject.git](https://github.com/hadysoufan/ReactASP-Hive.git)
 ```
 
 # Navigate to the project directory
@@ -68,10 +68,11 @@ The project is organized into several key directories, each serving a specific p
 
 - **Domain**: The `Domain` directory is dedicated to defining domain models and entities. These models represent the core business entities and their relationships, providing a conceptual framework for the application.
 
+- **Infrastructure**: The `Infrastructure` directory is dedicated to encapsulating anything related to external systems
+  
 - **Persistence**: In the `Persistence` directory, you'll find code related to data access and the database context. This includes the Entity Framework Core configurations, migrations, and the database context class.
 
 - **Application.Core**: This directory contains shared core functionality that is used across the application. It might include utility classes, extension methods, or other shared components.
-
 
 ## API Endpoints
 
@@ -82,5 +83,11 @@ The API exposes the following endpoints:
 - **POST /api/activities**: Create a new activity.
 - **PUT /api/activities/{id}**: Edit an existing activity by specifying its ID.
 - **DELETE /api/activities/{id}**: Delete an activity using its ID.
+
+- **GET /api/post**: Retrieve a list of posts.
+- **GET /api/post/{id}**: Retrieve details of a specific post by its unique ID.
+- **POST /api/post**: Create a new post.
+- **PUT /api/post/{id}**: Edit an existing post by specifying its ID.
+- **DELETE /api/post/{id}**: Delete an post using its ID.
 
 These endpoints allow users to interact with the application, perform CRUD operations on activities, and retrieve relevant information.
