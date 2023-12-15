@@ -85,6 +85,7 @@ The API exposes the following endpoints:
 - **DELETE /api/activities/{id}**: Delete an activity using its ID.
   
 These endpoints allow users to interact with the application, perform CRUD operations on activities, and retrieve relevant information.
+
 - **GET /api/post**: Retrieve a list of posts.
 - **GET /api/post/{id}**: Retrieve details of a specific post by its unique ID.
 - **POST /api/post**: Create a new post.
@@ -92,5 +93,12 @@ These endpoints allow users to interact with the application, perform CRUD opera
 - **DELETE /api/post/{id}**: Delete an post using its ID.
 
   These endpoints allow users to interact with the posts, perform CRUD operations on posts, and retrieve relevant information.
+
+- **GET /api/account**: Retrieve the current user.
+- **GET /api/profile/{id}**: Retrieve details of a specific user by its unique ID.
+- **Get /api/account/logint**: Loging a user.
+- **PUT /api/account/register**: Registering a user.
+
+These endpoints allow users to interact with the appuser entity, perform CRUD operations on user profile, and retrieve relevant information.
 
 
