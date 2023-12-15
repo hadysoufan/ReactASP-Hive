@@ -78,7 +78,7 @@ The project is organized into several key directories, each serving a specific p
 
 The API exposes the following endpoints:
 
-## Activities Controller
+## 1. Activities Controller
 - **GET /api/activities**: Retrieve a list of activities.
 - **GET /api/activities/{id}**: Retrieve details of a specific activity by its unique ID.
 - **POST /api/activities**: Create a new activity.
@@ -87,7 +87,7 @@ The API exposes the following endpoints:
   
 These endpoints allow users to interact with the application, perform CRUD operations on activities, and retrieve relevant information.
 
-## Post Controller
+## 2. Post Controller
 - **GET /api/post**: Retrieve a list of posts.
 - **GET /api/post/{id}**: Retrieve details of a specific post by its unique ID.
 - **POST /api/post**: Create a new post.
@@ -96,7 +96,7 @@ These endpoints allow users to interact with the application, perform CRUD opera
 
   These endpoints allow users to interact with the posts, perform CRUD operations on posts, and retrieve relevant information.
 
-## User Controller
+## 3. User Controller
 - **GET /api/account**: Retrieve the current user.
 - **GET /api/profile/{id}**: Retrieve details of a specific user by its unique ID.
 - **Get /api/account/login**: Loging a user.
@@ -104,10 +104,10 @@ These endpoints allow users to interact with the application, perform CRUD opera
 
 These endpoints allow users to interact with the appuser entity, perform CRUD operations on user profile, and retrieve relevant information.
 
-## Photo Controller
+## 4. Photo Controller
 - **GET /api/photo**: Add new photo.
 - **GET /api/photo/{id}**: Delete a photo.
 - **Get /api/photo/{id}/setMain**: Setting a photo to be the main photo of the user-profile
-- 
+  
 These endpoints allow users to interact with the photo entity, perform CRUD operations on photos, and retrieve relevant information.
 
