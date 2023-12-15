@@ -43,7 +43,7 @@ Instructions on how to set up and run the project on a local machine.
 
 ```bash
 # Clone the repository
-git clone [https://github.com/yourusername/yourproject.git](https://github.com/hadysoufan/ReactASP-Hive.git)
+git clone https://github.com/hadysoufan/ReactASP-Hive.git
 ```
 
 # Navigate to the project directory
