@@ -16,7 +16,7 @@ namespace Persistence
                     new AppUser{DisplayName = "Scienna Soufan", UserName = "scienna", Email = "scienna@gmail.com"},
                 };
 
-                foreach(var user in users)
+                foreach (var user in users)
                 {
                     await userManager.CreateAsync(user, "Test1234$");
                 };
@@ -239,7 +239,43 @@ namespace Persistence
                 await context.SaveChangesAsync();
             };
 
-            
+            var posts = new List<Post>
+            {
+                new Post
+                {
+                    Image = null,
+                    Date = DateTime.UtcNow.AddMonths(-2),
+                    Description = "Post 2 months ago"
+                },
+                new Post
+                {
+                    Image = null,
+                    Date = DateTime.UtcNow.AddMonths(-1),
+                    Description = "Post 1 month ago"
+                },
+                new Post
+                {
+                    Image = null,
+                    Date = DateTime.UtcNow,
+                    Description = "Current Post"
+                },
+                new Post
+                {
+                    Image = null,
+                    Date = DateTime.UtcNow.AddMonths(1),
+                    Description = "Future Post 1 month later"
+                },
+                new Post
+                {
+                    Image = null,
+                    Date = DateTime.UtcNow.AddMonths(2),
+                    Description = "Future Post 2 months later"
+                }
+            };
+
+            context.Posts.AddRange(posts);
+            context.SaveChanges();
+
         }
     }
 }
