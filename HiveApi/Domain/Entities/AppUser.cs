@@ -19,5 +19,6 @@ namespace Domain.Entities
         /// Gets or sets the collection of activities associated with the user.
         /// </summary>
         public ICollection<ActivityAttendee> Activities { get; set; }
+        public ICollection<Photo> Photos { get; set; }
     }
 }
