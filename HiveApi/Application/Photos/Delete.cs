@@ -3,27 +3,40 @@ using Application.Interface;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Photos
 {
+    /// <summary>
+    /// Represents the "Delete" functionality for photos.
+    /// </summary>
     public class Delete
     {
+        /// <summary>
+        /// Represents the command to delete a photo.
+        /// </summary>
         public class Command : IRequest<Result<Unit>>
         {
+            /// <summary>
+            /// Gets or sets the ID of the photo to be deleted.
+            /// </summary>
             public string Id { get; set; }
         }
 
+        /// <summary>
+        /// Handler for the <see cref="Command"/> to delete a photo.
+        /// </summary>
         public class Handler : IRequestHandler<Command, Result<Unit>>
         {
             private readonly DataContext _context;
             private readonly IPhotoAccessor _photoAccessor;
             private readonly IUserAccessor _userAccessor;
 
+            /// <summary>
+            /// Initializes a new instance of the <see cref="Handler"/> class.
+            /// </summary>
+            /// <param name="context">The data context.</param>
+            /// <param name="photoAccessor">The photo accessor service.</param>
+            /// <param name="userAccessor">The user accessor service.</param>
             public Handler(DataContext context, IPhotoAccessor photoAccessor, IUserAccessor userAccessor)
             {
                 _context = context;
@@ -31,6 +44,12 @@ namespace Application.Photos
                 _userAccessor = userAccessor;
             }
 
+            /// <summary>
+            /// Handles the <see cref="Command"/> to delete a photo.
+            /// </summary>
+            /// <param name="request">The command to delete a photo.</param>
+            /// <param name="cancellationToken">The cancellation token.</param>
+            /// <returns>A result indicating success or failure.</returns>
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                 var user = await _context.Users.Include(p => p.Photos)
@@ -48,9 +67,9 @@ namespace Application.Photos
 
                 user.Photos.Remove(photo);
 
-                var sucess = await _context.SaveChangesAsync() > 0;
+                var success = await _context.SaveChangesAsync() > 0;
 
-                if (sucess) return Result<Unit>.Success(Unit.Value);
+                if (success) return Result<Unit>.Success(Unit.Value);
 
                 return Result<Unit>.Failure("Problem deleting the photo from API");
             }
