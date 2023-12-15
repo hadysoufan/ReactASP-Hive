@@ -19,6 +19,12 @@ A social network platform using RwactJs for client side and ASP Core Web API 8 f
 
 Welcome to Hive, a robust social network platform designed to connect people and facilitate meaningful interactions. Hive provides a comprehensive set of features, including user authentication, profile management, posting, following, comments, private messaging, events, and a marketplace. Whether you're looking to share updates, connect with friends, or explore new opportunities, Hive is your go-to social hub.
 
+This application is designed to demonstrate basic CRUD (Create, Read, Update, Delete) operations for managing posts. It utilizes the following technologies:
+
+- MediatR: A simple library in .NET for in-process messaging.
+- AutoMapper: A library to map objects to each other.
+- Entity Framework Core: A lightweight, extensible, and cross-platform Object-Relational Mapping (ORM) framework.
+
 ## Purpose
 Hive aims to create a vibrant and interconnected community where users can express themselves, build relationships, and discover exciting opportunities. Our platform is built on the principles of inclusivity, security, and user-friendly design to ensure a seamless and enjoyable experience for all.
 
