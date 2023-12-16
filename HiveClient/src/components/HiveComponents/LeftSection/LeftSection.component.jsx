@@ -4,8 +4,8 @@ import { jwtDecode } from "jwt-decode";
 import '../../../asset/css/hive.styles.scss';
 import './LeftSection.component.styles.jsx';
 import DefaultImg from '../../../asset/img/hive/default.png';
-
-import { Main, Left } from './LeftSection.component.styles.jsx'
+import { Main, Left } from './LeftSection.component.styles.jsx';
+import { Link } from 'react-router-dom';
 
 function LeftSection() {
   const [userData, setUserData] = useState(null);
@@ -18,7 +18,8 @@ function LeftSection() {
 
       const userId = decodedToken.nameid;
       
-      const response = await axios.get(`http://localhost:5181/api/User/${userId}`);
+      const response = await axios.get('http://localhost:5000/api/account');
+      console.log(response);
 
       setUserData(response.data.data);
     } catch (error) {
@@ -57,10 +58,12 @@ function LeftSection() {
         {/* Side bar */}
         <div className="sidebar">
           {/* Home link */}
-          <a className="menu-item active" href='/'>
+          <Link to='/hive'>
+          <a className="menu-item active">
             <span><ion-icon name="home"></ion-icon></span>
             <h3>Home</h3>
           </a>
+          </Link>
 
           {/* Room link */}
           <a className="menu-item" href="/">
@@ -69,10 +72,12 @@ function LeftSection() {
           </a>
 
           {/* Create Activity */}
-          <a className="menu-item" href="/">
-            <span><ion-icon name="planet"></ion-icon></span>
+          <Link to='/hive/activities'>
+          <a className="menu-item" href="£">
+            <span><ion-icon name="people-circle-outline"></ion-icon></span>
             <h3>Create Activity</h3>
           </a>
+          </Link>
 
           {/* Notification link */}
           <a className="menu-item" id="notifications" href='/'>
