@@ -19,6 +19,12 @@ A social network platform using RwactJs for client side and ASP Core Web API 8 f
 
 Welcome to Hive, a robust social network platform designed to connect people and facilitate meaningful interactions. Hive provides a comprehensive set of features, including user authentication, profile management, posting, following, comments, private messaging, events, and a marketplace. Whether you're looking to share updates, connect with friends, or explore new opportunities, Hive is your go-to social hub.
 
+This application is designed to demonstrate basic CRUD (Create, Read, Update, Delete) operations for managing posts. It utilizes the following technologies:
+
+- MediatR: A simple library in .NET for in-process messaging.
+- AutoMapper: A library to map objects to each other.
+- Entity Framework Core: A lightweight, extensible, and cross-platform Object-Relational Mapping (ORM) framework.
+
 ## Purpose
 Hive aims to create a vibrant and interconnected community where users can express themselves, build relationships, and discover exciting opportunities. Our platform is built on the principles of inclusivity, security, and user-friendly design to ensure a seamless and enjoyable experience for all.
 
@@ -37,11 +43,11 @@ Instructions on how to set up and run the project on a local machine.
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/yourproject.git
+git clone https://github.com/hadysoufan/ReactASP-Hive.git
 ```
 
 # Navigate to the project directory
-``` cd yourproject ```
+``` cd API ```
 
 # Restore dependencies
 ``` dotnet restore ```
@@ -62,19 +68,52 @@ The project is organized into several key directories, each serving a specific p
 
 - **Domain**: The `Domain` directory is dedicated to defining domain models and entities. These models represent the core business entities and their relationships, providing a conceptual framework for the application.
 
+- **Infrastructure**: The `Infrastructure` directory is dedicated to encapsulating anything related to external systems
+  
 - **Persistence**: In the `Persistence` directory, you'll find code related to data access and the database context. This includes the Entity Framework Core configurations, migrations, and the database context class.
 
 - **Application.Core**: This directory contains shared core functionality that is used across the application. It might include utility classes, extension methods, or other shared components.
-
 
 ## API Endpoints
 
 The API exposes the following endpoints:
 
+## 1. Activities Controller
 - **GET /api/activities**: Retrieve a list of activities.
 - **GET /api/activities/{id}**: Retrieve details of a specific activity by its unique ID.
 - **POST /api/activities**: Create a new activity.
 - **PUT /api/activities/{id}**: Edit an existing activity by specifying its ID.
 - **DELETE /api/activities/{id}**: Delete an activity using its ID.
-
+  
 These endpoints allow users to interact with the application, perform CRUD operations on activities, and retrieve relevant information.
+
+## 2. Post Controller
+- **GET /api/post**: Retrieve a list of posts.
+- **GET /api/post/{id}**: Retrieve details of a specific post by its unique ID.
+- **POST /api/post**: Create a new post.
+- **PUT /api/post/{id}**: Edit an existing post by specifying its ID.
+- **DELETE /api/post/{id}**: Delete an post using its ID.
+
+  These endpoints allow users to interact with the posts, perform CRUD operations on posts, and retrieve relevant information.
+
+## 3. User Controller
+- **GET /api/account**: Retrieve the current user.
+- **GET /api/profile/{id}**: Retrieve details of a specific user by its unique ID.
+- **Get /api/account/login**: Loging a user.
+- **PUT /api/account/register**: Registering a user.
+
+These endpoints allow users to interact with the appuser entity, perform CRUD operations on user profile, and retrieve relevant information.
+
+## 4. Photo Controller
+- **GET /api/photo**: Add new photo.
+- **GET /api/photo/{id}**: Delete a photo.
+- **Get /api/photo/{id}/setMain**: Setting a photo to be the main photo of the user-profile
+  
+These endpoints allow users to interact with the photo entity, perform CRUD operations on photos, and retrieve relevant information.
+
+## 5. Profile Controller
+- **GET /api/profile/{username}**: Get a specific user profile by the id. 
+  
+These endpoints allow users to interact with the user entity, perform CRUD operations on user profile, and retrieve relevant information.
+
+
