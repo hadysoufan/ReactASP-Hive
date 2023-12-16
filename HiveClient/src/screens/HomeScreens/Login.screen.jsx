@@ -26,12 +26,9 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5181/Auth/login', formData);
+      const response = await axios.post('http://localhost:5000/api/account/login', formData);
       console.log(response.data);
-      if (response.data.success && response.data.data) {
-        localStorage.setItem('token', response.data.data);
-        navigate("/hive");
-      }
+      navigate("/hive");
     } catch (error) {
       console.error('Error logging in:', error);
     }
