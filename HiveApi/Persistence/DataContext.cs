@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace Persistence
 {
@@ -38,6 +39,21 @@ namespace Persistence
         public DbSet<Post> Posts { get; set; }
 
         /// <summary>
+        /// Gets or sets the DbSet for products.
+        /// </summary>
+        public DbSet<Product> Products { get; set; }
+
+        /// <summary>
+        /// Gets or sets the DbSet for comments.
+        /// </summary>
+        public DbSet<Comment> Comments { get; set; }
+
+        /// <summary>
+        /// Gets or sets the DbSet for user following.
+        /// </summary>
+        public DbSet<UserFollowing> UserFollowings { get; set; }
+
+        /// <summary>
         /// Configures the relationships and keys for the entities.
         /// </summary>
         /// <param name="builder">The model builder.</param>
@@ -59,6 +75,35 @@ namespace Persistence
                 .HasOne(u => u.Activity)
                 .WithMany(a => a.Attendees)
                 .HasForeignKey(aa => aa.ActivityId);
+
+            // Configure the relationship between Post and User
+            builder.Entity<Post>()
+                .HasOne(c => c.AppUser)
+                .WithMany(p => p.Posts)
+                .HasForeignKey(c => c.AppUserId);
+
+
+            // Configure the relationship between Comment and Activity
+            builder.Entity<Comment>()
+                .HasOne(c => c.Activity)
+                .WithMany(a => a.Comments)
+                .HasForeignKey(c => c.ActivityId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure the relationship between user and following
+            builder.Entity<UserFollowing>(b =>
+            {
+                b.HasKey(k => new { k.ObserverId, k.TargetId });
+
+                b.HasOne(o => o.Observer)
+                .WithMany(f => f.Followings)
+                .HasForeignKey(o => o.ObserverId);
+
+                b.HasOne(o => o.Target)
+                .WithMany(f => f.Followers)
+                .HasForeignKey(o => o.TargetId);
+            });
+
         }
     }
 }
