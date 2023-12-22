@@ -73,17 +73,165 @@ function MiddleSection() {
         {/* End of stories */}
 
         {/* Create post section */}
-        <form action="" className="create-post">
+        <form action="" className="create-post-hive">
           <div className="profile-picture">
             <img className='image' src={DefaultImg} alt="avatar" />
           </div>
-          <input className='input-create' type="text" name="image_upload" placeholder="create a post" id="create-post" />
-          <input type="submit" value="Post" className="btn-hive btn-primary-hive" />
+          <input className='input-create-post' type="text" name="image_upload" placeholder="create a post" id="create-post" />
+          <a type="submit" className="btn-hive btn-primary-hive">Post</a>
         </form>
 
         {/* Feeds section */}
         <div className="feeds">
           {/* Feed 1 */}
+          <div className="feed">
+            <div className="head">
+              <div className="user">
+                <div className="profile-picture">
+                  <img className='image' src={DefaultImg} alt="avatar" />
+                </div>
+                <div className="info">
+                  <h3>
+                    <a href="/user-profile">hadysoufan</a>
+                  </h3>
+                  <small>5 hours ago</small>
+                </div>
+              </div>
+              <Edit>
+                <i className="uil uil-ellipsis-h"></i>
+                <DropDown>
+                  <li>
+                    <a href="/">Edit</a>
+                  </li>
+                  <li>
+                    <a href="/">Delete</a>
+                  </li>
+                </DropDown>
+              </Edit>
+            </div>
+            <a href="/">
+              <div className="photo">
+                <img className='image' src={Feed1} alt="" />
+              </div>
+            </a>
+            <div className="action-button">
+              <div className="interaction-buttons">
+                <span>
+                  <i className="uil uil-heart"></i>
+                </span>
+                <span>
+                  <i className="uil uil-comment-dots"></i>
+                </span>
+                <span>
+                  <i className="uil uil-share-alt"></i>
+                </span>
+              </div>
+              <div className="bookmark">
+                <span>
+                  <i className="uil uil-bookmark-full"></i>
+                </span>
+              </div>
+            </div>
+            <div className="liked-by">
+              <span>
+                <img className='image' src={Profile1} alt="" />
+              </span>
+              <span>
+                <img className='image' src={Profile2} alt="" />
+              </span>
+              <span>
+                <img className='image' src={Profile3} alt="" />
+              </span>
+              <p>
+                Liked by <b>Hadi Soufan</b> and <b>23433 others</b>
+              </p>
+            </div>
+            <div className="caption">
+              <p>
+                <b>
+                  <a href="/">hadysoufan</a>
+                </b>{' '}
+                hello
+              </p>
+            </div>
+            <div className="comments text-muted"> View all 277 comments</div>
+          </div>
+
+          {/* Feed 2 */}
+          <div className="feed">
+            <div className="head">
+              <div className="user">
+                <div className="profile-picture">
+                  <img className='image' src={DefaultImg} alt="avatar" />
+                </div>
+                <div className="info">
+                  <h3>
+                    <a href="/user-profile">hadysoufan</a>
+                  </h3>
+                  <small>5 hours ago</small>
+                </div>
+              </div>
+              <Edit>
+                <i className="uil uil-ellipsis-h"></i>
+                <DropDown>
+                  <li>
+                    <a href="/">Edit</a>
+                  </li>
+                  <li>
+                    <a href="/">Delete</a>
+                  </li>
+                </DropDown>
+              </Edit>
+            </div>
+            <a href="/">
+              <div className="photo">
+                <img className='image' src={Feed1} alt="" />
+              </div>
+            </a>
+            <div className="action-button">
+              <div className="interaction-buttons">
+                <span>
+                  <i className="uil uil-heart"></i>
+                </span>
+                <span>
+                  <i className="uil uil-comment-dots"></i>
+                </span>
+                <span>
+                  <i className="uil uil-share-alt"></i>
+                </span>
+              </div>
+              <div className="bookmark">
+                <span>
+                  <i className="uil uil-bookmark-full"></i>
+                </span>
+              </div>
+            </div>
+            <div className="liked-by">
+              <span>
+                <img className='image' src={Profile1} alt="" />
+              </span>
+              <span>
+                <img className='image' src={Profile2} alt="" />
+              </span>
+              <span>
+                <img className='image' src={Profile3} alt="" />
+              </span>
+              <p>
+                Liked by <b>Hadi Soufan</b> and <b>23433 others</b>
+              </p>
+            </div>
+            <div className="caption">
+              <p>
+                <b>
+                  <a href="/">hadysoufan</a>
+                </b>{' '}
+                hello
+              </p>
+            </div>
+            <div className="comments text-muted"> View all 277 comments</div>
+          </div>
+
+          {/* Feed 3 */}
           <div className="feed">
             <div className="head">
               <div className="user">

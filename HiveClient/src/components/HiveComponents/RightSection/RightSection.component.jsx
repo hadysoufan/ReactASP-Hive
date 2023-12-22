@@ -6,7 +6,7 @@ import DefaultImg from '../../../asset/img/hive/default.png';
 import Profile1 from '../../../asset/img/hive/profile-1.jpg';
 import Profile2 from '../../../asset/img/hive/profile-2.jpg';
 
-import { Right, Message } from './RightSection.component.styles.jsx'
+import { Right, Message, FriendRequest } from './RightSection.component.styles.jsx'
 
 function RightSection() {
   return (
@@ -57,53 +57,17 @@ function RightSection() {
               <p className="text-muted">Hello how are you</p>
             </div>
           </div>
-
-          {/* Message 4 */}
-          <div className="message">
-            <div className="profile-picture">
-              <img className='image' src={Profile2} alt="ProfileImage" />
-              <div className="active"></div>
-            </div>
-            <div className="message-body">
-              <h5>Zayn Cenry</h5>
-              <p className="text-muted">Hello how are you</p>
-            </div>
-          </div>
-
-          {/* Message 5 */}
-          <div className="message">
-            <div className="profile-picture">
-              <img className='image' src={Profile2} alt="ProfileImage" />
-              <div className="active"></div>
-            </div>
-            <div className="message-body">
-              <h5>Zayn Cenry</h5>
-              <p className="text-muted">Hello how are you</p>
-            </div>
-          </div>
-
-          {/* Message 6 */}
-          <div className="message">
-            <div className="profile-picture">
-              <img className='image' src={Profile2} alt="ProfileImage" />
-              <div className="active"></div>
-            </div>
-            <div className="message-body">
-              <h5>Zayn Cenry</h5>
-              <p className="text-muted">Hello how are you</p>
-            </div>
-          </div>
         </Message>
 
         {/* Friend request */}
-        <div className="friend-requests">
+        <FriendRequest>
           <h4>Suggestions</h4>
 
           {/* Request 1 */}
           <div className="request">
             <div className="info">
               <div className="profile-picture">
-                <img className='image' src={DefaultImg} alt="DefaultImg" />
+                <img className='image' src={Profile1} alt="DefaultImg" />
               </div>
               <div>
                 <a href="/">
@@ -121,7 +85,7 @@ function RightSection() {
           <div className="request">
             <div className="info">
               <div className="profile-picture">
-                <img className='image' src={DefaultImg} alt="DefaultImg" />
+                <img className='image' src={Profile2} alt="DefaultImg" />
               </div>
               <div>
                 <a href="/">
@@ -134,61 +98,7 @@ function RightSection() {
               <button className="btn-hive btn-primary-hive">Follow</button>
             </div>
           </div>
-
-          {/* Request 3 */}
-          <div className="request">
-            <div className="info">
-              <div className="profile-picture">
-                <img className='image' src={DefaultImg} alt="DefaultImg" />
-              </div>
-              <div>
-                <a href="/">
-                  <h5>hadysoufan</h5>
-                </a>
-                <p className="text-muted">8 mutual friends</p>
-              </div>
-            </div>
-            <div className="action">
-              <button className="btn-hive btn-primary-hive">Follow</button>
-            </div>
-          </div>
-
-          {/* Request 4 */}
-          <div className="request">
-            <div className="info">
-              <div className="profile-picture">
-                <img className='image' src={DefaultImg} alt="DefaultImg" />
-              </div>
-              <div>
-                <a href="/">
-                  <h5>hadysoufan</h5>
-                </a>
-                <p className="text-muted">8 mutual friends</p>
-              </div>
-            </div>
-            <div className="action">
-              <button className="btn-hive btn-primary-hive">Follow</button>
-            </div>
-          </div>
-
-          {/* Request 5 */}
-          <div className="request">
-            <div className="info">
-              <div className="profile-picture">
-                <img className='image' src={DefaultImg} alt="DefaultImg" />
-              </div>
-              <div>
-                <a href="/">
-                  <h5>hadysoufan</h5>
-                </a>
-                <p className="text-muted">8 mutual friends</p>
-              </div>
-            </div>
-            <div className="action">
-              <button className="btn-hive btn-primary-hive">Follow</button>
-            </div>
-          </div>
-        </div>
+        </FriendRequest>
       </Right>
       {/* End of right section */}
     </>

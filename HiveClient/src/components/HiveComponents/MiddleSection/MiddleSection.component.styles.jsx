@@ -1,4 +1,10 @@
 import styled from 'styled-components';
+import Story1 from '../../../asset/img/hive/story-1.jpg';
+import Story2 from '../../../asset/img/hive/story-2.jpg';
+import Story3 from '../../../asset/img/hive/story-3.jpg';
+import Story4 from '../../../asset/img/hive/story-4.jpg';
+import Story5 from '../../../asset/img/hive/story-5.jpg';
+import Story6 from '../../../asset/img/hive/story-6.jpg';
 
 
 export const Middle = styled.div`
@@ -33,22 +39,24 @@ export const Middle = styled.div`
 				z-index: 2;
 			}
 			&:nth-child(1) {
-				background: url('../../../asset/img/hive/story-5.jpg') no-repeat center center;
+				background: url(${Story1}) no-repeat center center/cover;
+				
+				
 			}
 			&:nth-child(2) {
-				background: url('../../../asset/img/hive/story-2.jpg') no-repeat center center;
+				background: url(${Story2}) no-repeat center center/cover;
 			}
 			&:nth-child(3) {
-				background: url('../../../asset/img/hive/story-3.jpg') no-repeat center center;
+				background: url(${Story3}) no-repeat center center/cover;
 			}
 			&:nth-child(4) {
-				background: url('../../../asset/img/hive/story-4.jpg') no-repeat center center;
+				background: url(${Story4}) no-repeat center center/cover;
 			}
 			&:nth-child(5) {
-				background: url('../../../asset/img/hive/story-5.jpg') no-repeat center center;
+				background: url(${Story5}) no-repeat center center/cover;
 			}
 			&:nth-child(6) {
-				background: url('../../../asset/img/hive/story-6.jpg') no-repeat center center;
+				background: url(${Story6}) no-repeat center center/cover;
 			}
 		}
 	}
@@ -60,7 +68,7 @@ export const Middle = styled.div`
 			border: 3px solid ${({ theme }) => theme.colors.primary};
 		}
 	}
-	.create-post {
+	.create-post-hive {
 		width: 100%;
 		display: flex;
 		align-items: center;
@@ -68,8 +76,8 @@ export const Middle = styled.div`
 		margin-top: 1rem;
 		background: ${({ theme }) => theme.colors.white};
 		padding: 0.4rem ${({ theme }) => theme.spacing.cardPadding};
-		border-radius: ${({ theme }) => theme.spacing.borderRaduis};
-		.input-create {
+		border-radius: ${({ theme }) => theme.spacing.borderRadius};
+		.input-create-post {
 			justify-self: start;
 			width: 100%;
 			padding-left: 1rem;

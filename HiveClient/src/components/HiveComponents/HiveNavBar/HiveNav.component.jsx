@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 import '../../../asset/css/hive.styles.scss';
 import HiveoneyComb from '../../../asset/img/hive/honeycomb.png'; 
@@ -57,15 +57,17 @@ function HiveNav() {
 
             {/* Create Post and User Profile */}
             <div className="create">
-              <a className="btn btn-primary" data-toggle="modal" data-target="#createPostModal" href="/">
+              <a className="btn-hive btn-primary-hive" data-toggle="modal" data-target="#createPostModal" href="/">
                 Create
               </a>
 
               {/* User Profile Picture */}
               <div className="profile-picture">
-                <a href="/">
-                  <img className='image' src={DefaultImg} alt="avatar" />
-                </a>
+              <Link to="/hive/user-profile">
+                  <a href="/">
+                    <img className='image' src={DefaultImg} alt="avatar" />
+                  </a>
+              </Link>
               </div>
 
               {/* User Dropdown Menu */}

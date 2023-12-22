@@ -4,7 +4,7 @@ export const Main = styled.main`
 	.container {
 		.left {
 			height: max-content;
-			position: sticky;
+			position: sticky !important;
 			top: ${({ theme }) => theme.spacing.stickyTopLeft};
 			.profile {
 				padding: .5rem;
@@ -92,7 +92,7 @@ export const Left = styled.div`
 			}
 		}
 	}
-	.btn {
+	.btn-hive {
 		margin-top: 1rem;
 		width: 100%;
 		text-align: center;
