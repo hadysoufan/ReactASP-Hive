@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
@@ -11,9 +12,11 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231222062431_CommentsModel")]
+    partial class CommentsModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -250,21 +253,6 @@ namespace Persistence.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Domain.Entities.UserFollowing", b =>
-                {
-                    b.Property<string>("ObserverId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("TargetId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ObserverId", "TargetId");
-
-                    b.HasIndex("TargetId");
-
-                    b.ToTable("UserFollowings");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -445,26 +433,10 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Entities.AppUser", "AppUser")
                         .WithMany("Posts")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("Domain.Entities.UserFollowing", b =>
-                {
-                    b.HasOne("Domain.Entities.AppUser", "Observer")
-                        .WithMany("Followings")
-                        .HasForeignKey("ObserverId")
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.AppUser", "Target")
-                        .WithMany("Followers")
-                        .HasForeignKey("TargetId")
-                        .IsRequired();
-
-                    b.Navigation("Observer");
-
-                    b.Navigation("Target");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -528,10 +500,6 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.AppUser", b =>
                 {
                     b.Navigation("Activities");
-
-                    b.Navigation("Followers");
-
-                    b.Navigation("Followings");
 
                     b.Navigation("Photos");
 
