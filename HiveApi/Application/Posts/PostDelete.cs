@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using Application.Core;
+using AutoMapper;
+using Domain.Entities;
 using MediatR;
 using Persistence;
 
@@ -12,7 +14,7 @@ namespace Application.Posts
         /// <summary>
         /// Represents the command to delete a post.
         /// </summary>
-        public class Command : IRequest
+        public class Command : IRequest<Result<Unit>>
         {
             /// <summary>
             /// Gets or sets the unique identifier of the post to be deleted.
@@ -23,7 +25,7 @@ namespace Application.Posts
         /// <summary>
         /// Represents the handler for deleting a post.
         /// </summary>
-        public class Handler : IRequestHandler<Command>
+        public class Handler : IRequestHandler<Command, Result<Unit>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -45,15 +47,19 @@ namespace Application.Posts
             /// <param name="request">The delete post command.</param>
             /// <param name="cancellationToken">The cancellation token.</param>
             /// <returns>A task representing the asynchronous operation.</returns>
-            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                 var post = await _context.Posts.FindAsync(request.Id);
 
+                if (post is null) return null;
+
                 _context.Remove(post);
 
-                await _context.SaveChangesAsync();
+                var result = await _context.SaveChangesAsync() > 0;
 
-                return Unit.Value;
+                if (!result) return Result<Unit>.Failure("Failed to delete the post");
+
+                return Result<Unit>.Success(Unit.Value);
             }
         }
     }
