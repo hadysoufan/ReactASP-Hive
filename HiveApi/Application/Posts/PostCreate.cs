@@ -1,5 +1,8 @@
-﻿using Domain.Entities;
+﻿using Application.Core;
+using Domain.Entities;
+using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Persistence;
 
 namespace Application.Posts
@@ -12,7 +15,7 @@ namespace Application.Posts
         /// <summary>
         /// Represents the command to create a new post.
         /// </summary>
-        public class Command : IRequest
+        public class Command : IRequest<Result<Unit>>
         {
             /// <summary>
             /// Gets or sets the post to be created.
@@ -20,10 +23,18 @@ namespace Application.Posts
             public Post Post { get; set; }
         }
 
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator() 
+            {
+                RuleFor(x => x.Post).SetValidator(new PostValidator());
+            }
+        }
+
         /// <summary>
         /// Represents the handler for creating a new post.
         /// </summary>
-        public class Handler : IRequestHandler<Command>
+        public class Handler : IRequestHandler<Command, Result<Unit>>
         {
             private readonly DataContext _context;
 
@@ -42,13 +53,15 @@ namespace Application.Posts
             /// <param name="request">The create post command.</param>
             /// <param name="cancellationToken">The cancellation token.</param>
             /// <returns>A task representing the asynchronous operation.</returns>
-            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                 _context.Posts.Add(request.Post);
 
-                await _context.SaveChangesAsync();
+                var result = await _context.SaveChangesAsync() > 0;
 
-                return Unit.Value;
+                if (!result) return Result<Unit>.Failure("Failed to create activity");
+
+                return Result<Unit>.Success(Unit.Value);
             }
         }
     }
