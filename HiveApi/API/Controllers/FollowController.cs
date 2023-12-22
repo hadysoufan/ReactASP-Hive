@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    /// <summary>
+    /// Controller for managing followers.
+    /// </summary>
     public class FollowController : BaseApiController
     {
         [HttpPost("{username}")]
@@ -11,6 +14,7 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new FollowToggle.Command { TargetUsername = username }));
         }
 
+        /// <inheritdoc />
         [HttpGet("{username}")]
         public async Task<IActionResult> GetFollowing(string username, string predicate)
         {
