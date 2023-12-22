@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.Entities
+﻿namespace Domain.Entities
 {
+    /// <summary>
+    /// Represents a user following relationship.
+    /// </summary>
     public class UserFollowing
     {
         public string ObserverId { get; set; }
