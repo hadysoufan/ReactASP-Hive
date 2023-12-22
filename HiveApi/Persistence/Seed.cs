@@ -7,7 +7,7 @@ namespace Persistence
     {
         public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
         {
-            if (!userManager.Users.Any() && !context.Activities.Any())
+            if (!userManager.Users.Any() && !context.Activities.Any() && !context.Posts.Any() && !context.Products.Any())
             {
                 var users = new List<AppUser>
                 {
@@ -233,13 +233,9 @@ namespace Persistence
                             },
                         }
                     }
-                };
+                }; 
 
-                await context.Activities.AddRangeAsync(activities);
-                await context.SaveChangesAsync();
-            };
-
-            var posts = new List<Post>
+                var posts = new List<Post>
             {
                 new Post
                 {
@@ -273,8 +269,78 @@ namespace Persistence
                 }
             };
 
-            context.Posts.AddRange(posts);
-            context.SaveChanges();
+                var products = new List<Product>
+            {
+                new Product
+                {
+                    Name = "Product 1",
+                    Description = "Description for Product 1",
+                    Price = 50,
+                    Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMHFZjpPT1zlQDp-GmgdAwVByzVCeBxfkqFg&usqp=CAU",
+                    Type = "Type 1",
+                    Brand = "Brand 1",
+                    QtyInStock = 100
+                },
+                new Product
+                {
+                    Name = "Product 2",
+                    Description = "Description for Product 2",
+                    Price = 40,
+                    Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMHFZjpPT1zlQDp-GmgdAwVByzVCeBxfkqFg&usqp=CAU",
+                    Type = "Type 2",
+                    Brand = "Brand 2",
+                    QtyInStock = 56
+                },
+                new Product
+                {
+                    Name = "Product 3",
+                    Description = "Description for Product 3",
+                    Price = 50,
+                    Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMHFZjpPT1zlQDp-GmgdAwVByzVCeBxfkqFg&usqp=CAU",
+                    Type = "Type 3",
+                    Brand = "Brand 3",
+                    QtyInStock = 100
+                },
+                new Product
+                {
+                    Name = "Product 4",
+                    Description = "Description for Product 4",
+                    Price = 50,
+                    Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMHFZjpPT1zlQDp-GmgdAwVByzVCeBxfkqFg&usqp=CAU",
+                    Type = "Type 4",
+                    Brand = "Brand 4",
+                    QtyInStock = 10
+                },
+                new Product
+                {
+                    Name = "Product 5",
+                    Description = "Description for Product 5",
+                    Price = 50,
+                    Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMHFZjpPT1zlQDp-GmgdAwVByzVCeBxfkqFg&usqp=CAU",
+                    Type = "Type 5",
+                    Brand = "Brand 5",
+                    QtyInStock = 100
+                },
+                new Product
+                {
+                    Name = "Product 6",
+                    Description = "Description for Product 6",
+                    Price = 50,
+                    Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMHFZjpPT1zlQDp-GmgdAwVByzVCeBxfkqFg&usqp=CAU",
+                    Type = "Type 6",
+                    Brand = "Brand 6",
+                    QtyInStock = 100
+                }
+
+            };
+
+                await context.Activities.AddRangeAsync(activities);
+                await context.Posts.AddRangeAsync(posts);
+                await context.Products.AddRangeAsync(products);
+                await context.SaveChangesAsync();
+            };
+
+            
 
         }
     }
