@@ -5,7 +5,7 @@ import Login from './screens/HomeScreens/Login.screen';
 import SignUp from './screens/HomeScreens/Signup.screen';
 import Hive from './screens/HiveScreens/Hive.screen';
 import UserProfile from './screens/HiveScreens/UserProfile/UserProfile.screen';
-import theme from './style/theme';
+import theme from './styled/theme';
 import EditProfile from './screens/HiveScreens/EditUserProfile/EditProfile.screen';
 import Activities from './screens/HiveScreens/Activities/Activities.screen.tsx'
 
