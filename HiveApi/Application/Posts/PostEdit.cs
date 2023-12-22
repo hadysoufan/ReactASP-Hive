@@ -1,6 +1,8 @@
-﻿using AutoMapper;
+﻿using Application.Core;
+using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Persistence;
 
 namespace Application.Posts
@@ -13,7 +15,7 @@ namespace Application.Posts
         /// <summary>
         /// Represents the command to edit a post.
         /// </summary>
-        public class Command : IRequest
+        public class Command : IRequest<Result<Unit>>
         {
             /// <summary>
             /// Gets or sets the post with updated information.
@@ -24,7 +26,7 @@ namespace Application.Posts
         /// <summary>
         /// Represents the handler for editing a post.
         /// </summary>
-        public class Handler : IRequestHandler<Command>
+        public class Handler : IRequestHandler<Command, Result<Unit>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -46,15 +48,19 @@ namespace Application.Posts
             /// <param name="request">The edit post command.</param>
             /// <param name="cancellationToken">The cancellation token.</param>
             /// <returns>A task representing the asynchronous operation.</returns>
-            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                 var post = await _context.Posts.FindAsync(request.Post.Id);
 
+                if (post is null) return null;
+
                 _mapper.Map(request.Post, post);
 
-                await _context.SaveChangesAsync();
+                var result = await _context.SaveChangesAsync() > 0;
 
-                return Unit.Value;
+                if (!result) return Result<Unit>.Failure("Failed to update post");
+
+                return Result<Unit>.Success(Unit.Value);
             }
         }
     }
