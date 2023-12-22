@@ -1,10 +1,8 @@
-﻿using Domain.Entities;
+﻿using Application.Core;
+using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Application.Posts
 {
@@ -16,12 +14,12 @@ namespace Application.Posts
         /// <summary>
         /// Represents the query to retrieve a list of posts.
         /// </summary>
-        public class Query : IRequest<List<Post>> { }
+        public class Query : IRequest<Result<List<Post>>> { }
 
         /// <summary>
         /// Represents the handler for retrieving a list of posts.
         /// </summary>
-        public class Handler : IRequestHandler<Query, List<Post>>
+        public class Handler : IRequestHandler<Query, Result<List<Post>>>
         {
             private readonly DataContext _context;
 
@@ -40,9 +38,9 @@ namespace Application.Posts
             /// <param name="request">The query to retrieve the list of posts.</param>
             /// <param name="cancellationToken">The cancellation token.</param>
             /// <returns>A task representing the asynchronous operation and returning the list of posts.</returns>
-            public async Task<List<Post>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<Post>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Posts.ToListAsync();
+                return Result<List<Post>>.Success(await _context.Posts.ToListAsync());
             }
         }
     }
