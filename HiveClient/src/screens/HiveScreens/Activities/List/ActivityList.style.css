@@ -56,14 +56,14 @@
     border-radius: 4px;
   }
   
-  .btn-primary {
-    background-color: orangered;
+  .btn-primary-act {
+    background-color: #ff8906;
     color: #fff;
     border: none;
     padding: 8px 12px;
     cursor: pointer;
   }
   
-  .btn-primary:hover {
-    background-color: orangered;
+  .btn-primary-act:hover {
+    background-color: #ff8906;
   }

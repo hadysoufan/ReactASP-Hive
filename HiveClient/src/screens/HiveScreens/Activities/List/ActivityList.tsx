@@ -26,7 +26,7 @@ function ActivityList({ activities, selectActivity }: Props) {
               </div>
               <div className="item-extra">
                 <div className="ui basic label">{activity.category}</div>
-                <button onClick={() => selectActivity(activity.id)} className="btn btn-primary">View</button>
+                <button onClick={() => selectActivity(activity.id)} className="btn-act btn-primary-act">View</button>
               </div>
             </div>
           ))}

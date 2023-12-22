@@ -2,18 +2,14 @@ import styled from 'styled-components';
 
 export const UserHeaderWrapper = styled.div`
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 8rem;
-
+	height: 15rem;
 `;
 
 export const UserHeaderInner = styled.div`
     width: 80%;
-    min-height: 15vh;
+    height: 15rem;
     display: grid;
-    align-items: center;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr ;
     grid-column-gap: 2em;
     grid-row-gap: 2em;
 `;
@@ -23,8 +19,6 @@ export const UhLeft = styled.div`
     height: 100%;
     padding: 0 2em 0 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
 
 `;
 
@@ -38,7 +32,6 @@ export const UhImage = styled.div`
     align-items: center;
     cursor: pointer;
 `;
-
 
 export const UhImageInner = styled.img`
     width: 10.5rem;
@@ -105,7 +98,6 @@ export const EditBtn = styled.button`
     }
 `;
 
-
 export const UserLinks = styled.div`
     a {
 		margin: 0 1em 0 0;
@@ -126,30 +118,27 @@ export const UserBioName = styled.p`
 	line-height: 1;
 `;
 
-
 export const UserStories = styled.div`
-margin: 3em 0 1em 0;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	width: 70rem;
+	height: 10rem;
+	position:relative;
+	top:-25rem;
+	left:25rem;
 `;
 
 export const UserStoriesInner = styled.div`
-    width: 80%;
+    width: auto;
+	height: 8rem;
 	display: grid;
-	align-items: center;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: repeat(5, 1fr);
 	grid-column-gap: 4em;
 `;
 
 export const StoryWrapper = styled.div`
-width: 100%;
-	height: 100%;
+	width: 100% !important;
+	height: 100% !important;
 	display: flex;
-	justify-content: center;
 	flex-direction: column;
-	align-items: center;
 	h2 {
 		margin: .25em;
 		font-size: 1.1em;
@@ -185,18 +174,14 @@ export const StoryImg = styled.img`
 
 export const UserPageWrapper = styled.div`
     display: flex;
-	justify-content: center;
-	margin: 3em 0;
+	grid-template-columns:1fr 1fr;
 `;
 
 export const UserPageInner = styled.div`
     width: 100%;
 	display: grid;
-	align-items: center;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-template-rows: 1fr 1fr 1fr;
-	grid-column-gap: 2em;
-	grid-row-gap: 2em;
+	grid-template-columns: 1fr .02fr;
+	grid-template-rows: 1fr 1fr;
 `;
 
 export const ImageWapper = styled.div`
