@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Core;
+using Domain.Entities;
 using MediatR;
 using Persistence;
 
@@ -12,7 +13,7 @@ namespace Application.Posts
         /// <summary>
         /// Represents the query to retrieve details of a post.
         /// </summary>
-        public class Query : IRequest<Post>
+        public class Query : IRequest<Result<Post>>
         {
             /// <summary>
             /// Gets or sets the unique identifier of the post.
@@ -23,7 +24,7 @@ namespace Application.Posts
         /// <summary>
         /// Represents the handler for retrieving details of a post.
         /// </summary>
-        public class Handler : IRequestHandler<Query, Post>
+        public class Handler : IRequestHandler<Query, Result<Post>>
         {
             private readonly DataContext _context;
 
@@ -42,9 +43,12 @@ namespace Application.Posts
             /// <param name="request">The query to retrieve post details.</param>
             /// <param name="cancellationToken">The cancellation token.</param>
             /// <returns>A task representing the asynchronous operation and returning the post details.</returns>
-            public async Task<Post> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<Post>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Posts.FindAsync(request.Id);
+                var post = await _context.Posts.FindAsync(request.Id);
+
+                return Result<Post>.Success(post);
+
             }
         }
     }
