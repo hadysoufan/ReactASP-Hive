@@ -7,40 +7,12 @@ import agent from "../api/agent.ts";
  * @class ActivityStore
  */
 class ActivityStore {
-  /**
-   * Array of activities.
-   * @type {Activity[]}
-   */
   activities: Activity[] = [];
-
-  /**
-   * Currently selected activity.
-   * @type {Activity | undefined}
-   */
   selectedActivity: Activity | undefined = undefined;
-
-  /**
-   * Flag indicating whether the store is in edit mode.
-   * @type {boolean}
-   */
   editMode = false;
-
-  /**
-   * Flag indicating whether activities are currently being loaded.
-   * @type {boolean}
-   */
   loading = false;
-
-  /**
-   * Flag indicating whether the initial loading of activities is in progress.
-   * @type {boolean}
-   */
   loadingInitial = false;
 
-  /**
-   * Creates an instance of ActivityStore.
-   * @memberof ActivityStore
-   */
   constructor() {
     makeAutoObservable(this);
   }
