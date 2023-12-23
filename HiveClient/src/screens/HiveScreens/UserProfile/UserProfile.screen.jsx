@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import $ from "jquery";
-import "./UserProfile.screen.styles.jsx";
 import { Link } from "react-router-dom";
-
-import HiveNav from "../../../components/HiveComponents/HiveNavBar/HiveNav.component";
-
-import * as User from "./UserProfile.screen.styles.jsx";
-
+import HiveNav from "../../../components/HiveComponents/HiveNavBar/HiveNav.component.tsx";
 import DefaultImg from "../../../asset/img/hive/default.png";
 import LeftSection from "../../../components/HiveComponents/LeftSection/LeftSection.component.jsx";
 import UserProfileGlobal from "../../../styled/UserProfileGlobal.styled.js";
-
+import * as User from "./UserProfile.screen.styles.jsx";
+/**
+ * React component representing the user profile page.
+ * @function UserProfile
+ * @returns {JSX.Element} The JSX representation of the user profile page.
+ */
 function UserProfile() {
   useEffect(() => {
     const addImageHoverLogic = (imgId, iovId) => {
