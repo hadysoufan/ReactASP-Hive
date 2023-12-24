@@ -242,31 +242,7 @@ namespace Persistence
                     Image = null,
                     Date = DateTime.UtcNow.AddMonths(-2),
                     Description = "Post 2 months ago"
-                },
-                new Post
-                {
-                    Image = null,
-                    Date = DateTime.UtcNow.AddMonths(-1),
-                    Description = "Post 1 month ago"
-                },
-                new Post
-                {
-                    Image = null,
-                    Date = DateTime.UtcNow,
-                    Description = "Current Post"
-                },
-                new Post
-                {
-                    Image = null,
-                    Date = DateTime.UtcNow.AddMonths(1),
-                    Description = "Future Post 1 month later"
-                },
-                new Post
-                {
-                    Image = null,
-                    Date = DateTime.UtcNow.AddMonths(2),
-                    Description = "Future Post 2 months later"
-                }
+                }                
             };
 
                 var products = new List<Product>
