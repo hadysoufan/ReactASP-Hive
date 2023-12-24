@@ -1,10 +1,10 @@
 import React from "react";
-import HiveNav from "../../../components/HiveComponents/HiveNavBar/HiveNav.component.tsx";
+import HiveNav from "../../components/HiveNavBar/HiveNav.component.tsx";
 import { Link } from "react-router-dom";
 
 import "./EditProfile.screen.styles.scss";
-import LeftSection from "../../../components/HiveComponents/LeftSection/LeftSection.component.jsx";
-import UserProfileGlobal from "../../../styled/UserProfileGlobal.styled.js";
+import LeftSection from "../../components/LeftSection/LeftSection.component.jsx";
+import UserProfileGlobal from "../../styled/UserProfileGlobal.styled.js";
 
 /**
  * React component representing the Edit Profile page.
