@@ -5,17 +5,21 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 // Importing Screens
-import Home from "./screens/HomeScreens/Home.screen";
-import Login from "./screens/HomeScreens/Login.screen.tsx";
-import SignUp from "./screens/HomeScreens/Signup.screen";
-import Hive from "./screens/HiveScreens/Hive.screen";
-import UserProfile from "./screens/HiveScreens/UserProfile/UserProfile.screen";
-import EditProfile from "./screens/HiveScreens/EditUserProfile/EditProfile.screen";
-import Activities from "./screens/HiveScreens/Activities/Activities.screen.tsx";
+import Home from "./screens/Home.screen";
+import Login from "./screens/Login.screen.tsx";
+import SignUp from "./screens/Signup.screen";
+import Hive from "./screens/Hive.screen.tsx";
+import UserProfile from "./screens/UserProfile/UserProfile.screen";
+import EditProfile from "./screens/EditUserProfile/EditProfile.screen";
+import Activities from "./screens/Activities.screen.tsx";
 import TestErrors from "./features/errors/TestError.tsx";
+import CreatePost from "./components/PostCreate/CreatePost.screen.tsx";
+
 
 // Importing Styles and Theme
 import theme from "./styled/theme";
+import PostDetails from "./components/PostDetails/PostDetails.component.tsx";
+
 
 /**
  * Main App component that defines routes using React Router.
@@ -25,7 +29,7 @@ import theme from "./styled/theme";
 function App() {
   return (
     <>
-      <ToastContainer position="top-start" />
+      <ToastContainer position="bottom-right" />
       <ThemeProvider theme={theme}>
         <Router>
           <Routes>
@@ -38,7 +42,8 @@ function App() {
             <Route path="/hive/user-profile" element={<UserProfile />} />
             <Route path="/hive/user-profile/edit" element={<EditProfile />} />
 
-            {/* <Route path='/hive/create-post' element={<CreatePost />} /> */}
+           <Route path='/hive/create-post' element={<CreatePost />} />
+           <Route path="/hive/post-details" element={<PostDetails />} />
 
             <Route path="/hive/activities" element={<Activities />} />
 
