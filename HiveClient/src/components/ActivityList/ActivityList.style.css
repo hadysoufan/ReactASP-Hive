@@ -48,12 +48,8 @@
     align-items: center;
   }
   
-  .ui.basic.label {
-    background-color: #f8f9fa;
-    color: #212529;
-    font-size: 12px;
-    padding: 4px 8px;
-    border-radius: 4px;
+  .button-group {
+    display: flex;
   }
   
   .btn-primary-act {
@@ -62,6 +58,12 @@
     border: none;
     padding: 8px 12px;
     cursor: pointer;
+    margin-right: 8px;
+  }
+  
+  .btn-primary-delete {
+    background-color: hsl(0, 95%, 65%) !important;
+    margin-right: 8px;
   }
   
   .btn-primary-act:hover {
