@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import Story1 from '../../../asset/img/hive/story-1.jpg';
-import Story2 from '../../../asset/img/hive/story-2.jpg';
-import Story3 from '../../../asset/img/hive/story-3.jpg';
-import Story4 from '../../../asset/img/hive/story-4.jpg';
-import Story5 from '../../../asset/img/hive/story-5.jpg';
-import Story6 from '../../../asset/img/hive/story-6.jpg';
+import Story1 from '../../asset/img/hive/story-1.jpg';
+import Story2 from '../../asset/img/hive/story-2.jpg';
+import Story3 from '../../asset/img/hive/story-3.jpg';
+import Story4 from '../../asset/img/hive/story-4.jpg';
+import Story5 from '../../asset/img/hive/story-5.jpg';
+import Story6 from '../../asset/img/hive/story-6.jpg';
 
 
 export const Middle = styled.div`
@@ -86,57 +86,7 @@ export const Middle = styled.div`
 			margin-right: 1rem;
 		}
 	}
-	.feeds {
-		.feed {
-			background: ${({ theme }) => theme.colors.white};
-			border-radius: ${({ theme }) => theme.spacing.cardBorderRadius};
-			padding: ${({ theme }) => theme.spacing.cardPadding};
-			margin: 1rem 0;
-			font-size: 0.85rem;
-			line-height: 1.5;
-		}
-	}
-	.feed {
-		.head {
-			display: flex;
-			justify-content: space-between;
-			position: relative;
-		}
-		.user {
-			display: flex;
-			gap: 1rem;
-		}
-		.photo {
-			border-radius: ${({ theme }) => theme.spacing.cardBorderRadius};
-			overflow: hidden;
-			margin: 0.7rem 0;
-		}
-		.action-button {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			font-size: 1.4rem;
-			margin: 0.6rem;
-		}
-	}
-	.liked-by {
-		display: flex;
-		span {
-			width: 1.4rem;
-			height: 1.4rem;
-			display: block;
-			border-radius: 50%;
-			overflow: hidden;
-			border: 2px solid ${({ theme }) => theme.colors.white};
-			margin-left: -0.6rem;
-			&:first-child {
-				margin: 0;
-			}
-		}
-		p {
-			margin-left: 0.5rem;
-		}
-	}
+	
 `;
 
 export const DropDown = styled.ul`
