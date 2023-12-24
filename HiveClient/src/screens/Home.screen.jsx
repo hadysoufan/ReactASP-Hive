@@ -1,18 +1,18 @@
 import React from "react";
-import HomeNavBar from '../../components/HomeComponents/HomeNavBar/HomeNav.component';
-import HomeFooter from '../../components/HomeComponents/HomeFooter/HomeFooter.component';
+import HomeNavBar from '../components/HomeNav.component.jsx';
+import HomeFooter from '../components/HomeFooter.component.jsx';
 
-import SocialUpdateImage from "../../asset/img/illustrations/Social update-bro.svg";
-import InstacartLogo from '../../asset/img/brands/instacart.png';
-import KickstarterLogo from '../../asset/img/brands/kickstarter.png';
-import LyftLogo from '../../asset/img/brands/lyft.png';
-import ShopifyLogo from '../../asset/img/brands/shopify.png';
-import PinterestLogo from '../../asset/img/brands/pinterest.png';
-import TwitterLogo from '../../asset/img/brands/twitter.png';
-import FollowingIllustration from '../../asset/img/illustrations/Following-rafiki.svg';
-import FollowingAmico from '../../asset/img/illustrations/Following-amico.svg';
-import MobileFeed from '../../asset/img/illustrations/Mobile feed-bro.svg';
-import WebDevelopment from '../../asset/img/illustrations/web-development.svg'
+import SocialUpdateImage from "../asset/img/illustrations/Social update-bro.svg";
+import InstacartLogo from '../asset/img/brands/instacart.png';
+import KickstarterLogo from '../asset/img/brands/kickstarter.png';
+import LyftLogo from '../asset/img/brands/lyft.png';
+import ShopifyLogo from '../asset/img/brands/shopify.png';
+import PinterestLogo from '../asset/img/brands/pinterest.png';
+import TwitterLogo from '../asset/img/brands/twitter.png';
+import FollowingIllustration from '../asset/img/illustrations/Following-rafiki.svg';
+import FollowingAmico from '../asset/img/illustrations/Following-amico.svg';
+import MobileFeed from '../asset/img/illustrations/Mobile feed-bro.svg';
+import WebDevelopment from '../asset/img/illustrations/web-development.svg'
 
 function Home() {
   return (
