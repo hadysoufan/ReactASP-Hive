@@ -1,5 +1,6 @@
 ﻿using Application.Posts;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -7,6 +8,7 @@ namespace API.Controllers
     /// <summary>
     /// Controller for managing posts.
     /// </summary>
+    
     [Route("api/[controller]")]
     [ApiController]
     public class PostController : BaseApiController
@@ -14,10 +16,11 @@ namespace API.Controllers
 
         /// <inheritdoc />
         // GET: api/post
+        [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<List<Post>>> GetPosts()
+        public async Task<IActionResult> GetPosts()
         {
-            return await Mediator.Send(new PostList.Query());
+            return HandleResult(await Mediator.Send(new PostList.Query()));
         }
 
         /// <inheritdoc />
@@ -25,7 +28,9 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Post>> GetPost(Guid id)
         {
-            return await Mediator.Send(new PostDetails.Query { Id = id });
+            var result = await Mediator.Send(new PostDetails.Query { Id = id });
+
+            return HandleResult(result);
         }
 
         /// <inheritdoc />
@@ -33,7 +38,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult> CreatePost(Post post)
         {
-            return Ok(await Mediator.Send(new PostCreate.Command { Post = post }));
+            return HandleResult(await Mediator.Send(new PostCreate.Command { Post = post }));
         }
 
         /// <inheritdoc />
@@ -42,7 +47,7 @@ namespace API.Controllers
         public async Task<ActionResult> EditPost(Guid id, Post post)
         {
             post.Id = id;
-            return Ok(await Mediator.Send(new PostEdit.Command { Post = post }));   
+            return HandleResult(await Mediator.Send(new PostEdit.Command { Post = post }));   
         }
 
         /// <inheritdoc />
@@ -50,7 +55,7 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult>DeletePost(Guid id)
         {
-            return Ok(await Mediator.Send(new PostDelete.Command { Id = id }));
+            return HandleResult(await Mediator.Send(new PostDelete.Command { Id = id }));
         }
 
 

@@ -1,5 +1,6 @@
 using Application.Core;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -7,6 +8,7 @@ namespace API.Controllers
     /// <summary>
     /// Base API controller providing common functionality for derived controllers.
     /// </summary>
+    [AllowAnonymous]
     [ApiController]
     [Route("api/[controller]")]
     public class BaseApiController : ControllerBase

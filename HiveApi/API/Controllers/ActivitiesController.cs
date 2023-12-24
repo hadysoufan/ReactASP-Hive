@@ -40,7 +40,7 @@ namespace API.Controllers
 
         /// <inheritdoc />
         // Edit: api/activities/{id}
-        [Authorize(Policy = "IsActivityHost")]
+        //[Authorize(Policy = "IsActivityHost")]
         [HttpPut("{id}")]
         public async Task<IActionResult> EditActivity(Guid id, Activity activity)
         {
@@ -50,7 +50,7 @@ namespace API.Controllers
 
         /// <inheritdoc />
         // Delete: api/activities/{id}
-        [Authorize(Policy = "IsActivityHost")]
+        //[Authorize(Policy = "IsActivityHost")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteActivity(Guid id)
         {
