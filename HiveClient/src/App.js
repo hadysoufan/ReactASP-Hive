@@ -19,6 +19,8 @@ import CreatePost from "./components/PostCreate/CreatePost.screen.tsx";
 // Importing Styles and Theme
 import theme from "./styled/theme";
 import PostDetails from "./components/PostDetails/PostDetails.component.tsx";
+import Loader from "./components/Loader/Loader.component.jsx";
+import PostForm from "./components/PostForm/PostForm.component.tsx";
 
 
 /**
@@ -44,10 +46,13 @@ function App() {
 
            <Route path='/hive/create-post' element={<CreatePost />} />
            <Route path="/hive/post-details" element={<PostDetails />} />
+           <Route path="hive/edit-post" element={<PostForm />} />
 
             <Route path="/hive/activities" element={<Activities />} />
 
             <Route path="/errors" element={<TestErrors />} />
+
+            <Route path="/hive/loader" element={<Loader />} />
           </Routes>
         </Router>
       </ThemeProvider>
