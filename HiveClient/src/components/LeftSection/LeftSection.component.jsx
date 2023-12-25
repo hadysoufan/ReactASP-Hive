@@ -33,7 +33,7 @@ function LeftSection() {
     <Left>
       {/* Profile section */}
       {userData && (
-        <a href='/hive/user-profile' className="profile">
+        <Link to='/hive/user-profile' className="profile">
           <div className="profile-picture">
           <img
               className="image"
@@ -47,87 +47,64 @@ function LeftSection() {
             <h4 className="user-name">{userData.displayName}</h4>
             <p className="text-muted">{userData.username}</p>
           </div>
-        </a>
+        </Link>
       )}
 
       {/* Side bar */}
       <div className="sidebar">
         {/* Home link */}
-        <Link to='/hive'>
-        <a className="menu-item active">
+        <Link to='/hive' className="menu-item active">
           <span><ion-icon name="home"></ion-icon></span>
           <h3>Home</h3>
-        </a>
         </Link>
 
         {/* Room link */}
-        <a className="menu-item" href="/">
+        <Link to='' className="menu-item">
           <span><ion-icon name="planet"></ion-icon></span>
           <h3>Create Room</h3>
-        </a>
+        </Link>
 
         {/* Create Activity */}
-        <Link to='/hive/activities'>
-        <a className="menu-item" href="£">
+        <Link to='/hive/activities' className="menu-item">
           <span><ion-icon name="people-circle-outline"></ion-icon></span>
           <h3>Create Activity</h3>
-        </a>
         </Link>
 
         {/* Notification link */}
-        <a className="menu-item" id="notifications" href='/'>
+        <Link to='' className="menu-item" id="notifications">
           <span><ion-icon name="notifications-circle"></ion-icon></span>
           <h3>Notifications</h3>
-
-          {/* Notification popup */}
-          <div className="notification-popup">
-            {/* Notification items */}
-            {Array.from({ length: 6 }).map((_, index) => (
-              <div key={index}>
-                {/* Notification user picture */}
-                <div className="profile-picture">
-                  <img src={`~/img/hive/profile-${index + 1}.jpg`} alt="" />
-                </div>
-                {/* Notification body */}
-                <div className="notification-body">
-                  <b>keke Benjamin</b> accepted your friend request
-                  <small className="text-muted">2 Days Ago</small>
-                </div>
-              </div>
-            ))}
-          </div>
-          {/* End of notification */}
-        </a>
+        </Link>
 
         {/* Message link */}
-        <a className="menu-item" id="messages-notifications" href='/'>
+        <Link to='' className="menu-item" id="messages-notifications">
           <span><ion-icon name="chatbox"></ion-icon></span>
           <h3>Messages</h3>
-        </a>
+        </Link>
 
         {/* Bookmarks link */}
-        <a className="menu-item" href='/'>
+        <Link to='' className="menu-item">
           <span><ion-icon name="bookmarks"></ion-icon></span>
           <h3>Bookmarks</h3>
-        </a>
+        </Link>
 
         {/* Analytics link */}
-        <a className="menu-item" href='/'>
+        <Link to='' className="menu-item">
           <span><ion-icon name="analytics"></ion-icon></span>
           <h3>Analytics</h3>
-        </a>
+        </Link>
 
         {/* Theme link */}
-        <a className="menu-item" href='/'>
+        <Link to='' className="menu-item">
           <span><ion-icon name="color-palette"></ion-icon></span>
           <h3>Theme</h3>
-        </a>
+        </Link>
 
         {/* Setting link */}
-        <a className="menu-item" href='/'>
+        <Link to='' className="menu-item">
           <span><ion-icon name="settings"></ion-icon></span>
           <h3>Settings</h3>
-        </a>
+        </Link>
       </div>
       {/* End of side bar */}
 
