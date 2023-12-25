@@ -1,67 +1,35 @@
 import React from "react";
-import { Activity } from "../../app/models/activity.ts";
 import ActivityList from "../ActivityList/ActivityList.tsx";
 import ActivityDetails from "../ActivityDetails/ActivityDetails.tsx";
-import ActivityForm from "../CreateActivity/ActivityForm.tsx";
+import ActivityForm from "../ActivityForm/ActivityForm.tsx";
 import "./ActivityDashBoard.styles.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { useStore } from "../../app/stores/store.ts";
+import { observer } from "mobx-react-lite";
 
-interface Props {
-  activities: Activity[];
-  selectedActivity: Activity | undefined;
-  selectActivity: (id: string) => void;
-  cancelSelectActivity: () => void;
-  editMode: boolean;
-  openForm: (id: string) => void;
-  closeForm: () => void;
-  createOrEdit: (activity: Activity) => void;
-  deleteActivity: (id: string) => void;
-  submitting: boolean;
-}
+function ActivityDashBoard() {
 
-function ActivityDashBoard({
-  activities,
-  selectedActivity,
-  selectActivity,
-  cancelSelectActivity,
-  editMode,
-  openForm,
-  closeForm,
-  createOrEdit,
-  deleteActivity,
-  submitting,
-}: Props) {
+  const {activityStore} = useStore();
+  const {selectedActivity, editMode} = activityStore;
+
+
   return (
     <>
       <Container fluid="md" className="parent">
         <Row>
           <Col>
-            <ActivityList
-              activities={activities}
-              selectActivity={selectActivity}
-              openForm={openForm}
-              deleteActivity={deleteActivity}
-            />
+            <ActivityList/>
           </Col>
         </Row>
         <Row>
           <Col>
             {selectedActivity && !editMode && (
-              <ActivityDetails
-                activity={selectedActivity}
-                cancelSelectActivity={cancelSelectActivity}
-                openForm={openForm}
-              />
+              <ActivityDetails/>
             )}
             {editMode && (
-              <ActivityForm
-                closeForm={closeForm}
-                activity={selectedActivity}
-                createOrEdit={createOrEdit}
-                submitting={submitting}
-              />
+              <ActivityForm/>
             )}
           </Col>
         </Row>
@@ -70,4 +38,4 @@ function ActivityDashBoard({
   );
 }
 
-export default ActivityDashBoard;
+export default observer(ActivityDashBoard);

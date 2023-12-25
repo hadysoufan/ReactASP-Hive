@@ -1,14 +1,13 @@
 import React, { ChangeEvent, useState, useEffect } from "react";
 import { Activity } from '../../app/models/activity';
 import './ActivityForm.style.css';
+import { useStore } from "../../app/stores/store.ts";
+import { observer } from "mobx-react-lite";
 
-interface Props {
-  activity: Activity | undefined;
-  closeForm: () => void;
-  createOrEdit: (activity: Activity) => void;
-}
+function ActivityForm() {
 
-function ActivityForm({ activity: selectedActivity, closeForm, createOrEdit }: Props) {
+  const {activityStore} = useStore();
+  const {selectedActivity, closeForm, createActivity, updateActivity, loading} = activityStore;
 
   const [activity, setActivity] = useState<Activity>({
     id: '',
@@ -27,7 +26,7 @@ function ActivityForm({ activity: selectedActivity, closeForm, createOrEdit }: P
   }, [selectedActivity]);
 
   function handleSubmit() {
-    createOrEdit(activity);
+    activity.id ? updateActivity(activity) : createActivity(activity);
   }
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -46,8 +45,8 @@ function ActivityForm({ activity: selectedActivity, closeForm, createOrEdit }: P
         <input placeholder="Venue" value={activity.venue} name='venue' onChange={handleInputChange} />
 
         <div className="button-group">
-          <button className='btn btn-primary' type="submit">
-            Submit
+          <button disabled={loading}  className='btn btn-primary' type="submit">
+          {loading ? 'Submitting...' : 'Submit'}
           </button>
 
           <button onClick={closeForm}>
@@ -59,4 +58,4 @@ function ActivityForm({ activity: selectedActivity, closeForm, createOrEdit }: P
   );
 }
 
-export default ActivityForm;
+export default observer(ActivityForm);

@@ -9,12 +9,10 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../../app/stores/store.ts";
 import { toast } from "react-toastify";
 
-interface Props {
-    openForm: () => void;
-} 
-
-function ActivityNav({openForm}: Props) {
+function ActivityNav() {
     const { userStore } = useStore();
+
+    const {activityStore} = useStore();
 
     const navigate = useNavigate();
   
@@ -57,14 +55,12 @@ function ActivityNav({openForm}: Props) {
   
               {/* Create Post and User Profile */}
               <div className="create">
-                <a onClick={openForm} className="btn-hive btn-primary-hive create-post-btn">Create</a>
+                <Link to='' onClick={() => activityStore.openForm()} className="btn-hive btn-primary-hive create-post-btn">Create</Link>
   
                 {/* User Profile Picture */}
                 <div className="profile-picture">
                   <Link to="/hive/user-profile">
-                    <a href="/">
                       <img className="image" src={userStore.user?.image || DefaultImg} alt="avatar" />
-                    </a>
                   </Link>
                 </div>
   
@@ -75,12 +71,11 @@ function ActivityNav({openForm}: Props) {
                   </button>
                   {/* Dropdown Content */}
                   <div className="dropdown-content">
-                    <a href="#" onClick={handleLogout}>
+                    <Link to='' onClick={handleLogout}>
                       Logout
-                    </a>
-                    <a href="/">Settings</a>
+                    </Link>
                     <Link to="/errors">
-                      <a>Errors</a>
+                      Errors
                     </Link>
                   </div>
                 </div>

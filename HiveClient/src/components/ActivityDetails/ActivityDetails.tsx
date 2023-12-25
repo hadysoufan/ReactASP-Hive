@@ -1,15 +1,17 @@
 import React from "react";
 import "./ActivityDetails.styles.css";
-import { Activity } from '../../app/models/activity';
 import Feed from '../../asset/img/hive/feed-4.jpg';
+import { useStore } from "../../app/stores/store.ts";
+import Loader from "../Loader/Loader.component";
 
-interface Props {
-  activity: Activity;
-  cancelSelectActivity: () => void;
-  openForm: (id: string) => void;
-}
+function ActivityDetails() {
 
-function ActivityDetails({ activity, cancelSelectActivity, openForm }: Props) {
+  const {activityStore} = useStore();
+  const {selectedActivity: activity, openForm, cancelSelectedActivity} = activityStore;
+
+  if(!activity) return <Loader />;
+
+
   return (
     <div className="custom-card">
       <img className="card-image" src={Feed} alt="Activity Thumbnail" />
@@ -20,7 +22,7 @@ function ActivityDetails({ activity, cancelSelectActivity, openForm }: Props) {
         <button onClick={() => openForm(activity.id)} className="btn-activity btn-primary-activity">
           Edit
         </button>
-        <button onClick={cancelSelectActivity} className="btn-activity btn-primary-activity" type="button">
+        <button onClick={cancelSelectedActivity} className="btn-activity btn-primary-activity" type="button">
           Cancel
         </button>
       </div>

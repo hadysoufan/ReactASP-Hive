@@ -1,59 +1,61 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
-import { Activity } from "../../app/models/activity";
-import { Card, Button } from "react-bootstrap";
 import "./ActivityList.style.css";
+import { useStore } from "../../app/stores/store.ts";
+import { observer } from "mobx-react-lite";
 
-interface Props {
-  activities: Activity[];
-  selectActivity: (id: string) => void;
-  openForm: (id: string) => void;
-  deleteActivity: (id: string) => void;
-}
+function ActivityList() {
+  const { activityStore } = useStore();
+  const { deleteActivity, activitiesByDate, loading } = activityStore;
 
-function ActivityList({ activities, selectActivity, openForm, deleteActivity }: Props) {
+  const [target, setTarget] = useState('');
+
+  function handleActivityDelete(e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string){;
+    deleteActivity(id);
+  }
 
   return (
     <div className="item-group">
-      {activities.map((activity) => (
-        <Card key={activity.id} className="item">
-          <Card.Header>
-            <Card.Title>
-              <Link to="/getactivity">{activity.title}</Link>
-            </Card.Title>
-          </Card.Header>
-          <Card.Body>
-            <Card.Text className="item-meta">{activity.date}</Card.Text>
-            <Card.Text className="item-description">
-              <div>{activity.description}</div>
-              <div>
-                {activity.city}, {activity.venue}
-              </div>
-            </Card.Text>
-          </Card.Body>
-          <Card.Footer>
+      {activitiesByDate.map((activity) => (
+        <div key={activity.id} className="item">
+          <div className="item-header">
+            <Link to="/getactivity" className="header">
+              {activity.title}
+            </Link>
+          </div>
+          <div className="item-body">
+            <div className="item-meta">{activity.date}</div>
+            <div className="item-description">
+              {activity.description}
+              <br />
+              {activity.city}, {activity.venue}
+            </div>
+          </div>
+          <div className="item-footer">
             <div className="item-extra">
               <div className="ui basic label">{activity.category}</div>
               <div className="button-group">
-                <Button
-                  onClick={() => selectActivity(activity.id)}
+                <button
+                  onClick={() => activityStore.selectActivity(activity.id)}
                   className="btn-primary-act"
                 >
                   View
-                </Button>
-                <Button
-                  onClick={() => deleteActivity(activity.id)}
+                </button>
+                <button
+                  onClick={(e) => handleActivityDelete(e, activity.id)}
                   className="btn-primary-delete"
+                  name={activity.id}
+                  disabled={loading}
                 >
-                  Delete
-                </Button>
+                  {loading && target ? 'Deleting...' : 'Delete'}
+                </button>
               </div>
             </div>
-          </Card.Footer>
-        </Card>
+          </div>
+        </div>
       ))}
     </div>
   );
 }
 
-export default ActivityList;
+export default observer(ActivityList);
