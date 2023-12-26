@@ -1,44 +1,30 @@
-.activity-form-container {
-    width: 300px;
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+.modern-form {
+  width: 75%;
+  margin: 7rem auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-input {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.submit-btn {
+  background-color: #ff8906 !important; 
+  color: #fff;
+  border: none;
+  &:hover {
+    background-color: #b36004;
   }
-  
-  .activity-form-container form {
-    display: flex;
-    flex-direction: column;
+}
+
+.cancel-btn {
+  background-color: #a7a9be !important; 
+  color: #fff;
+  border: none;
+  &:hover {
+    background-color: #b36004;
   }
-  
-  .activity-form-container input {
-    margin-bottom: 10px;
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .button-group {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .button-group button {
-    padding: 8px 16px;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  .button-group button.btn-primary {
-    background-color: #ff8906;
-    color: #fff;
-    border: none;
-  }
-  
-  .button-group button.btn-secondary {
-    background-color: #6c757d;
-    color: #fff;
-    border: none;
-  }
-  
+}

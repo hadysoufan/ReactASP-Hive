@@ -1,36 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ActivityList from "../ActivityList/ActivityList.tsx";
-import ActivityDetails from "../ActivityDetails/ActivityDetails.tsx";
-import ActivityForm from "../ActivityForm/ActivityForm.tsx";
 import "./ActivityDashBoard.styles.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useStore } from "../../app/stores/store.ts";
 import { observer } from "mobx-react-lite";
+import { useStore } from "../../app/stores/store.ts";
+import Loader from "../Loader/Loader.component.jsx";
+import ActivityFilters from "./ActivityFilters.jsx";
 
 function ActivityDashBoard() {
+  const { activityStore } = useStore();
+  const { loadActivities, activityRegistry } = activityStore;
 
-  const {activityStore} = useStore();
-  const {selectedActivity, editMode} = activityStore;
+  useEffect(() => {
+    if (activityRegistry.size <= 1) loadActivities();
+  }, [activityRegistry.size, loadActivities]);
 
+  if (activityStore.loadingInitial) return <Loader />;
 
   return (
     <>
       <Container fluid="md" className="parent">
         <Row>
-          <Col>
-            <ActivityList/>
+          <Col xs={12}>
+            <ActivityList />
           </Col>
         </Row>
         <Row>
-          <Col>
-            {selectedActivity && !editMode && (
-              <ActivityDetails/>
-            )}
-            {editMode && (
-              <ActivityForm/>
-            )}
+          <Col xs={12}>
+            <ActivityFilters />
           </Col>
         </Row>
       </Container>
@@ -39,3 +38,4 @@ function ActivityDashBoard() {
 }
 
 export default observer(ActivityDashBoard);
+

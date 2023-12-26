@@ -55,7 +55,7 @@ function ActivityNav() {
   
               {/* Create Post and User Profile */}
               <div className="create">
-                <Link to='' onClick={() => activityStore.openForm()} className="btn-hive btn-primary-hive create-post-btn">Create</Link>
+                <Link to='/hive/create-activity' className="btn-hive btn-primary-hive create-post-btn">Create</Link>
   
                 {/* User Profile Picture */}
                 <div className="profile-picture">

@@ -1,8 +1,12 @@
 .parent {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr 1fr; /* Adjust the column layout as needed */
   grid-template-rows: 1fr;
-  grid-column-gap: 2rem;
+  grid-column-gap: 1rem;
   grid-row-gap: 0px;
-  margin-left: 5rem;
+  margin-left: 1%;
+  }
+
+  .activity-list {
+    grid-column: 1 / -1;
   }

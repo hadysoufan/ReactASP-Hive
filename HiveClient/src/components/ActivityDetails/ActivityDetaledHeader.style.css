@@ -1,0 +1,86 @@
+/* Your styles for the main container */
+.segment-group {
+    border: 1px solid #ddd; /* Example border for demonstration purposes */
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  /* Styles for the top segment containing the image and text */
+  .segment-top {
+    position: relative;
+    padding: 0;
+  }
+  
+  /* Style for the activity image */
+  .activity-image {
+    width: 50%;
+    filter: brightness(30%);
+  }
+  
+  /* Styles for the text overlay on the image */
+  .activity-text {
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    width: 90%; /* Adjust as needed */
+    max-width: 400px; /* Maximum width for responsiveness */
+    height: auto;
+    color: white;
+  }
+  
+  /* Styles for the item group containing header and text content */
+  .item-group {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  /* Styles for each item within the group */
+  .item {
+    /* Additional styles for each item, if needed */
+  }
+  
+  /* Styles for the item content */
+  .item-content {
+    /* Additional styles for item content, if needed */
+  }
+  
+  /* Style for the header text */
+  .header {
+    color: white;
+    font-size: 1.5rem; /* Adjust as needed */
+    margin-bottom: 10px;
+  }
+  
+  /* Styles for the bottom segment containing action buttons */
+  .segment-bottom {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+  }
+  
+  /* Style for action buttons */
+  .action-btn {
+    flex: 1;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Style for the "Manage Event" button */
+  .manage-event-btn {
+    margin-left: 10px; /* Adjust spacing between buttons */
+    background-color: #ffc107;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .activity-text {
+      width: 100%;
+      left: 0;
+    }
+  }
+  

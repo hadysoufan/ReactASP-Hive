@@ -1,33 +1,54 @@
-import React from "react";
-import "./ActivityDetails.styles.css";
-import Feed from '../../asset/img/hive/feed-4.jpg';
+import React, { useEffect } from "react";
 import { useStore } from "../../app/stores/store.ts";
 import Loader from "../Loader/Loader.component";
+import { observer } from "mobx-react-lite";
+import { Link, useParams } from "react-router-dom";
+import ActivityDetaledHeader from "./ActivityDetaledHeader.tsx";
+import ActivityDetailedInfo from "./ActivityDetailedInfo.tsx";
+import ActivityDetailedChat from "./ActivityDetailedChat.tsx";
+import ActivityDetailedSideBar from "./ActivityDetailedSideBar.tsx";
+import ActivitynavComponent from "../ActivityNavBar/Activitynav.component.tsx";
+import { Grid } from "semantic-ui-react";
+import './ActivityDetails.styles.css';
+import LeftSection from '../LeftSection/LeftSection.component.jsx'
 
 function ActivityDetails() {
+  const { activityStore } = useStore();
+  const {
+    selectedActivity: activity,
+    loadActivity,
+    loadingInitial,
+  } = activityStore;
+  const { id } = useParams();
 
-  const {activityStore} = useStore();
-  const {selectedActivity: activity, openForm, cancelSelectedActivity} = activityStore;
+  useEffect(() => {
+    if (id) loadActivity(id);
+  }, [id, loadActivity]);
 
-  if(!activity) return <Loader />;
-
+  if (loadingInitial || !activity) return <Loader />;
 
   return (
-    <div className="custom-card">
-      <img className="card-image" src={Feed} alt="Activity Thumbnail" />
-      <div className="card-content">
-        <h3 className="card-header">{activity.title}</h3>
-        <p className="card-meta">{activity.date}</p>
-        <p className="card-description">{activity.description}</p>
-        <button onClick={() => openForm(activity.id)} className="btn-activity btn-primary-activity">
-          Edit
-        </button>
-        <button onClick={cancelSelectedActivity} className="btn-activity btn-primary-activity" type="button">
-          Cancel
-        </button>
+    <>
+      <ActivitynavComponent />
+      
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', margin:'15rem 0' }}>
+      
+      <Grid>
+      <Grid.Column width={4}>
+      <LeftSection />
+        </Grid.Column>
+        <Grid.Column width={8}>
+          <ActivityDetaledHeader activity={activity} />
+          <ActivityDetailedInfo activity={activity} />
+          <ActivityDetailedChat />
+        </Grid.Column>
+        <Grid.Column width={4}>
+          <ActivityDetailedSideBar activity={activity} />
+        </Grid.Column>
+      </Grid>
       </div>
-    </div>
+    </>
   );
 }
 
-export default ActivityDetails;
+export default observer(ActivityDetails);
