@@ -1,9 +1,10 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { Activity } from "../models/activity";
+import { Activity, ActivityFormValues } from "../models/activity";
 import { User, UserFormValues } from "../models/user";
 import { toast } from "react-toastify";
 import { store } from "../stores/store.ts";
 import { Post } from "../models/post.ts";
+import { Profile } from "../models/profile.ts";
 
 /**
  * Function to introduce a delay using Promises.
@@ -92,12 +93,13 @@ const Activities = {
   list: (): Promise<Activity[]> => requests.get<Activity[]>("/activities"),
   details: (id: string): Promise<Activity> =>
     requests.get<Activity>(`/activities/${id}`),
-  create: (activity: Activity): Promise<void> =>
+  create: (activity: ActivityFormValues): Promise<void> =>
     requests.post<void>("/activities", activity),
-  update: (activity: Activity): Promise<void> =>
+  update: (activity: ActivityFormValues): Promise<void> =>
     requests.put<void>(`/activities/${activity.id}`, activity),
   delete: (id: string): Promise<void> =>
     requests.del<void>(`/activities/${id}`),
+  attend: (id: string) => requests.post<void>(`/activities/${id}/attend`, {})
 };
 
 /**
@@ -123,6 +125,10 @@ const Posts = {
   delete: (id: string): Promise<void> => requests.del<void>(`/post/${id}`),
 };
 
+const Profiles = {
+  get: (username: string) => requests.get<Profile>(`/profile/${username}`)
+}
+
 /**
  * Main agent object for all objects.
  */
@@ -130,6 +136,7 @@ const agent = {
   Activities,
   Account,
   Posts,
+  Profiles
 };
 
 export default agent;
