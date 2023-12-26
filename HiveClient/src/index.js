@@ -5,6 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { StoreContext, store } from "./app/stores/store.ts";
 import 'react-toastify/dist/ReactToastify.min.css';
+import 'react-calendar/dist/Calendar.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
