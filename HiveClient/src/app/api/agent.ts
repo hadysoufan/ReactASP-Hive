@@ -1,7 +1,6 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { Activity, ActivityFormValues } from "../models/activity";
 import { User, UserFormValues } from "../models/user";
-import { toast } from "react-toastify";
 import { store } from "../stores/store.ts";
 import { Post } from "../models/post.ts";
 import { Profile } from "../models/profile.ts";
@@ -125,6 +124,9 @@ const Posts = {
   delete: (id: string): Promise<void> => requests.del<void>(`/post/${id}`),
 };
 
+/**
+ * Object containing methods for interacting with 'Photo' API.
+ */
 const Profiles = {
   get: (username: string) => requests.get<Profile>(`/profile/${username}`)
 }
