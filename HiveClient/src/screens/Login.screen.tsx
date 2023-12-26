@@ -6,64 +6,24 @@ import HomeNavBar from "../components/HomeNav.component.jsx";
 import HomeFooter from "../components/HomeFooter.component.jsx";
 import { useStore } from "../app/stores/store.ts";
 import { observer } from "mobx-react-lite";
+import Loader from "../components/Loader/Loader.component.jsx";
+import { ErrorMessage, Formik } from "formik";
+import { Button, Form, Label } from "semantic-ui-react";
+import MyTextInput from "../form/MyTextInput.tsx";
 
 function Login() {
   const { userStore } = useStore();
-
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [formData, setFormData] = useState({
-    Email: "",
-    Password: "",
-  });
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-
   const navigate = useNavigate();
 
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      await userStore.login({
-        email: formData.Email,
-        password: formData.Password,
-      });
-
-      console.log(userStore.user);
-      navigate("/hive");
-    } catch (error) {
-      console.error("Login failed:", error);
-      if (error.response && error.response.status === 400) {
-        const errorMessage = error.response.data;
-        if (errorMessage === "Email not found") {
-          setEmailError("Email not found");
-          setPasswordError("");
-        } else if (errorMessage === "Incorrect password") {
-          setPasswordError("Incorrect password");
-          setEmailError(""); 
-        } else {
-          setEmailError("Validation error");
-          setPasswordError("Validation error");
-        }
-      } else {
-        console.error("Unexpected error:", error);
-      }
-    }
-  };
+  const [loading, setLoading] = useState(false);
 
   return (
     <>
+      {/* Loader component */}
+      {loading && <Loader />}
+
       {/* Navigation bar component */}
-      <HomeNavBar />
+      {!loading && <HomeNavBar />}
 
       {/* Login section */}
       <section className="py-4 py-md-5 my-5">
@@ -81,73 +41,50 @@ function Login() {
                 </span>
               </h2>
 
-              <form
-                onSubmit={handleSubmit}
-                id="account"
-                method="post"
-                data-bs-theme="light"
-              >
-                {/* Email input */}
-                <div className="mb-3">
-                  <input
-                    type="email"
-                    name="Email"
-                    value={formData.Email}
-                    onChange={handleInputChange}
-                    className={`shadow form-control ${
-                      emailError ? "is-invalid" : ""
-                    }`}
-                    autoComplete="username"
-                    aria-required="true"
-                    placeholder="name@example.com"
-                  />
-                  {emailError && (
-                    <div className="invalid-feedback">{emailError}</div>
-                  )}
-                </div>
+              <Formik
+            initialValues={{ email: "", password: "", error: null }}
+            onSubmit={async (values, { setErrors }) => {
+              setLoading(true);
 
-                {/* Password input with visibility toggle */}
-                <div className="input-group mb-3">
-                  <input
-                    type={passwordVisible ? "text" : "password"}
-                    name="Password"
-                    value={formData.Password}
-                    onChange={handleInputChange}
-                    className={`shadow form-control ${
-                      passwordError ? "is-invalid" : ""
-                    }`}
-                    autoComplete="current-password"
-                    aria-required="true"
-                    placeholder="Password"
-                    id="passwordField"
-                  />
-                  {passwordError && (
-                    <div className="invalid-feedback">{passwordError}</div>
-                  )}
-                  {/* Password visibility toggle icon */}
-                  <span
-                    className="input-group-text"
-                    id="togglePassword"
-                    onClick={togglePasswordVisibility}
-                  >
-                    {/* Eye icon */}
-                    <ion-icon
-                      name={passwordVisible ? "eye-off-outline" : "eye-outline"}
-                    ></ion-icon>
-                  </span>
-                </div>
-
-                {/* Submit button */}
-                <div className="mb-5">
-                  <button
-                    id="login-submit"
-                    className="btn btn-primary shadow"
-                    type="submit"
-                  >
-                    Log in
-                  </button>
-                </div>
-              </form>
+              try {
+                await userStore.login(values);
+                navigate('/hive'); 
+              } catch (error) {
+                setErrors({ error: "Invalid email or password" });
+              } finally {
+                setLoading(false);
+              }
+            }}
+          >
+                {({ handleSubmit, isSubmitting, errors }) => (
+                  <Form onSubmit={handleSubmit} autoComplete="off">
+                    <MyTextInput placeholder="Email" name="email" />
+                    <MyTextInput
+                      placeholder="Password"
+                      name="password"
+                      type="password"
+                    />
+                    <ErrorMessage
+                      name="error"
+                      render={() => (
+                        <Label
+                          style={{ marginBottom: 10 }}
+                          basic
+                          color="red"
+                          content={errors.error}
+                        />
+                      )}
+                    />
+                    <Button
+                      loading={isSubmitting}
+                      color="orange"
+                      content="Login"
+                      type="submit"
+                      fluid
+                    />
+                  </Form>
+                )}
+              </Formik>
 
               {/* Forgot password link */}
               <p className="text-muted">

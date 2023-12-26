@@ -4,64 +4,26 @@ import HomeNavBar from "../components/HomeNav.component.jsx";
 import HomeFooter from "../components/HomeFooter.component.jsx";
 import SignUpSVG from "../asset/img/illustrations/Sign up-rafiki.svg";
 import { useStore } from "../app/stores/store.ts";
+import { ErrorMessage, Formik } from "formik";
+import { Button, Form, Label, Loader } from "semantic-ui-react";
+import MyTextInput from "../form/MyTextInput.tsx";
+import * as Yup from "yup";
+import ValidationErrors from "../features/errors/ValidationErrors.tsx";
+import { error } from "jquery";
 
 function SignUp() {
   const { userStore } = useStore();
-
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  const [validationErrors, setValidationErrors] = useState({});
-  const [formData, setFormData] = useState({
-    DisplayName: "",
-    UserName: "",
-    Email: "",
-    Password: "",
-    ConfirmPassword: "",
-  });
-
   const navigate = useNavigate();
 
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
-
-  const toggleConfirmPasswordVisibility = () => {
-    setConfirmPasswordVisible(!confirmPasswordVisible);
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-    try {
-      await userStore.register({
-        email: formData.Email,
-        username: formData.UserName,
-        displayName: formData.DisplayName,
-        password: formData.Password,
-      });
-      navigate('/hive');
-    } catch (error) {
-      if (error.response && error.response.status === 400) {
-        setValidationErrors(error.response.data.errors);
-      } else {
-        console.error('Registration error:', error);
-      }
-    }
-  };
-  
+  const [loading, setLoading] = useState(false);
 
   return (
     <>
+      {/* Loader component */}
+      {loading && <Loader />}
+
       {/* Navigation bar component */}
-      <HomeNavBar />
+      {!loading && <HomeNavBar />}
 
       {/* Sign-up section */}
       <section className="py-4 py-md-5 my-5">
@@ -82,105 +44,62 @@ function SignUp() {
               </h2>
 
               {/* Sign-up form */}
-              <form onSubmit={handleSubmit} method="post" id="account" data-bs-theme="light">
-                {/* Full Name input */}
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    name="DisplayName"
-                    value={formData.DisplayName}
-                    onChange={handleInputChange}
-                    className="form-control shadow-sm"
-                    placeholder="Full Name"
-                  />
-                  {/* Display validation error for DisplayName */}
-                  {validationErrors?.DisplayName && (
-                    <div className="text-danger">
-                      {validationErrors.DisplayName[0]}
-                    </div>
-                  )}
-                </div>
+              <Formik
+                initialValues={{
+                  displayName: "",
+                  username: "",
+                  email: "",
+                  password: "",
+                  error: null,
+                }}
+                onSubmit={async (values, { setErrors }) => {
+                  setLoading(true);
 
-                {/* Username input */}
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    name="UserName"
-                    value={formData.UserName}
-                    onChange={handleInputChange}
-                    className="form-control shadow-sm"
-                    placeholder="Username"
-                  />
-                </div>
-
-                {/* Email input */}
-                <div className="mb-3">
-                  <input
-                    type="email"
-                    name="Email"
-                    value={formData.Email}
-                    onChange={handleInputChange}
-                    className="form-control shadow-sm"
-                    autoComplete="username"
-                    aria-required="true"
-                    placeholder="name@example.com"
-                  />
-                </div>
-
-                {/* Password input */}
-                <div className="mb-3 input-group">
-                  <input
-                    type={passwordVisible ? "text" : "password"}
-                    name="Password"
-                    value={formData.Password}
-                    onChange={handleInputChange}
-                    className="form-control shadow-sm"
-                    autoComplete="new-password"
-                    aria-required="true"
-                    placeholder="Password"
-                  />
-                  {/* Toggle password visibility */}
-                  <span
-                    className="input-group-text"
-                    onClick={togglePasswordVisibility}
+                  try {
+                    await userStore.register(values);
+                    navigate("/hive");
+                  } catch (error) {
+                    setErrors({ error });
+                  } finally {
+                    setLoading(false);
+                  }
+                }}
+                validateYupSchema={Yup.object({
+                  displayName: Yup.string().required(),
+                  username: Yup.string().required(),
+                  email: Yup.string().required(),
+                  password: Yup.string().required(),
+                })}
+              >
+                {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
+                  <Form
+                    className="error"
+                    onSubmit={handleSubmit}
+                    autoComplete="off"
                   >
-                    <ion-icon
-                      name={passwordVisible ? "eye-off-outline" : "eye-outline"}
-                    ></ion-icon>
-                  </span>
-                </div>
+                    <MyTextInput placeholder="Full Name" name="displayname" />
+                    <MyTextInput placeholder="Username" name="username" />
+                    <MyTextInput placeholder="Email" name="email" />
+                    <MyTextInput
+                      placeholder="Password"
+                      name="password"
+                      type="password"
+                    />
+                    <ErrorMessage
+                      name="error"
+                      render={() => <ValidationErrors errors={errors} />}
+                    />
 
-                {/* Confirm Password input */}
-                {/* <div className="mb-3 input-group">
-                  <input
-                    type={confirmPasswordVisible ? "text" : "password"}
-                    name="ConfirmPassword"
-                    value={formData.ConfirmPassword}
-                    onChange={handleInputChange}
-                    className="form-control shadow-sm"
-                    autoComplete="new-password"
-                    placeholder="Confirm Password"
-                  />
-                  <span
-                    className="input-group-text"
-                    onClick={toggleConfirmPasswordVisibility}
-                  >
-                    <i
-                      className={`fas fa-eye${
-                        confirmPasswordVisible ? "-slash" : ""
-                      }`}
-                      id="eyeIcon"
-                    ></i>
-                  </span>
-                </div> */}
-
-                {/* Submit button */}
-                <div className="mb-5">
-                  <button type="submit" className="btn btn-primary shadow">
-                    Create account
-                  </button>
-                </div>
-              </form>
+                    <Button
+                      loading={isSubmitting}
+                      color="orange"
+                      content="Sign Up"
+                      type="submit"
+                      fluid
+                    />
+                  </Form>
+                )}
+              </Formik>
 
               {/* Login link */}
               <p className="text-muted">
