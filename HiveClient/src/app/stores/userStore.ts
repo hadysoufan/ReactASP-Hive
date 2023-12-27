@@ -33,7 +33,7 @@ export default class UserStore {
    */
   login = async (creds: UserFormValues) => {
     try {
-      const user = await agent.Account.login(creds);      
+      const user = await agent.Account.login(creds);
       store.commonStore.setToken(user.token);
       runInAction(() => (this.user = user));
     } catch (error) {
@@ -81,5 +81,9 @@ export default class UserStore {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  setImage = (image: string) => {
+    if (this.user) this.user.image = image;
   };
 }
