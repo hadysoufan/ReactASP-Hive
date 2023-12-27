@@ -10,11 +10,9 @@ import Home from "./screens/Home.screen";
 import Login from "./screens/Login.screen.tsx";
 import SignUp from "./screens/Signup.screen";
 import Hive from "./screens/Hive.screen.tsx";
-import UserProfile from "./screens/UserProfile/UserProfile.screen.tsx";
 import EditProfile from "./screens/EditUserProfile/EditProfile.screen";
 import Activities from "./screens/Activities.screen.tsx";
 import TestErrors from "./features/errors/TestError.tsx";
-import CreatePost from "./components/PostCreate/CreatePost.screen.tsx";
 
 
 // Importing Styles and Theme
@@ -25,6 +23,8 @@ import PostForm from "./components/PostForm/PostForm.component.tsx";
 import ActivityDetails from "./components/ActivityDetails/ActivityDetails.tsx";
 import ActivityForm from './components/ActivityForm/ActivityForm.tsx';
 import ProfilePage from "./features/Profiles/ProfilePage.tsx";
+import Posts from "./screens/Posts.screen.tsx";
+import PhotoUploadWidget from "./common/imageUpload/PhotoUploadWidget.tsx";
 
 
 /**
@@ -48,9 +48,9 @@ function App() {
             <Route path="/hive/user-profile/:username" element={<ProfilePage />} />
             <Route path="/hive/user-profile/edit" element={<EditProfile />} />
 
-           <Route path='/hive/create-post' element={<CreatePost />} />
-           <Route path="/hive/post-details" element={<PostDetails />} />
-           <Route path="hive/edit-post" element={<PostForm />} />
+           <Route path="/hive/post-details/:id" element={<PostDetails />} />
+           <Route path="/hive/create-post" element={<PostForm />} key='create' />
+           <Route path="/hive/manage-post/:id" element={<PostForm />} key='manage'/>
 
             <Route path="/hive/activities" element={<Activities />} />
             <Route path="/hive/create-activity" element={<ActivityForm key='create'/>} />
@@ -60,6 +60,11 @@ function App() {
             <Route path="/errors" element={<TestErrors />} />
 
             <Route path="/hive/loader" element={<Loader />} />
+
+            <Route path="/hive/create" element={<PhotoUploadWidget />} />
+
+            <Route path="/posts" element={<Posts />} />
+
           </Routes>
         </Router>
       </ThemeProvider>
