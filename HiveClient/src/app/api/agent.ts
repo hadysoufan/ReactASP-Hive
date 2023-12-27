@@ -3,7 +3,7 @@ import { Activity, ActivityFormValues } from "../models/activity";
 import { User, UserFormValues } from "../models/user";
 import { store } from "../stores/store.ts";
 import { Post } from "../models/post.ts";
-import { Profile } from "../models/profile.ts";
+import { Photo, Profile } from "../models/profile.ts";
 
 /**
  * Function to introduce a delay using Promises.
@@ -128,7 +128,14 @@ const Posts = {
  * Object containing methods for interacting with 'Photo' API.
  */
 const Profiles = {
-  get: (username: string) => requests.get<Profile>(`/profile/${username}`)
+  get: (username: string) => requests.get<Profile>(`/profile/${username}`),
+  uploadPhoto: (file: Blob) => {
+    let formData = new FormData();
+    formData.append('File', file);
+    return axios.post<Photo>('photo', formData, {
+      headers: {'Content-Type': 'multipart/form-data'}
+    })
+  } 
 }
 
 /**
