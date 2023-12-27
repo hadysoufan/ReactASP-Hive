@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import '../../asset/css/hive.styles.scss';
 import './LeftSection.component.styles.jsx';
 import DefaultImg from '../../asset/img/hive/default.png';
-import { Main, Left, Profile, SideBar } from './LeftSection.component.styles.jsx';
-import { Link } from 'react-router-dom';
+import { Main, Left } from './LeftSection.component.styles.jsx';
+import { Link, NavLink } from 'react-router-dom';
 import { useStore } from '../../app/stores/store.ts';
 
 function LeftSection() {
@@ -33,7 +33,7 @@ function LeftSection() {
     <Left>
       {/* Profile section */}
       {userData && (
-        <Link to='/hive/user-profile' className="profile">
+        <Link to={`/hive/user-profile/${userData.username}`} className="profile">
           <div className="profile-picture">
           <img
               className="image"
@@ -53,10 +53,10 @@ function LeftSection() {
       {/* Side bar */}
       <div className="sidebar">
         {/* Home link */}
-        <Link to='/hive' className="menu-item active">
+        <NavLink to='/hive' className="menu-item">
           <span><ion-icon name="home"></ion-icon></span>
           <h3>Home</h3>
-        </Link>
+        </NavLink>
 
         {/* Room link */}
         <Link to='' className="menu-item">
@@ -65,10 +65,10 @@ function LeftSection() {
         </Link>
 
         {/* Create Activity */}
-        <Link to='/hive/activities' className="menu-item">
+        <NavLink to='/hive/activities' className="menu-item">
           <span><ion-icon name="people-circle-outline"></ion-icon></span>
-          <h3>Create Activity</h3>
-        </Link>
+          <h3>Activities</h3>
+        </NavLink>
 
         {/* Notification link */}
         <Link to='' className="menu-item" id="notifications">

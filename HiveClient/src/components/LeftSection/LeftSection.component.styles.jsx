@@ -1,11 +1,9 @@
 import styled from "styled-components";
 
 export const Main = styled.main`
-    .left {
-      height: max-content;
-      position: sticky !important;
-      top: ${({ theme }) => theme.spacing.stickyTopLeft};
-    }
+    height: max-content;
+    position: sticky ;
+    top: ${({ theme }) => theme.spacing.stickyTopLeft};
 `;
 
 
@@ -76,6 +74,7 @@ export const Left = styled.div`
     }
     .active {
       background: ${({ theme }) => theme.colors.light};
+
       ion-icon {
         color: ${({ theme }) => theme.colors.primary};
       }

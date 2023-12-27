@@ -9,13 +9,9 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../../app/stores/store.ts";
 import { toast } from "react-toastify";
 
-interface Props {
-  openForm: () => void;
-} 
 
-
-function HiveNav({openForm}: Props) {
-  const { userStore } = useStore();
+function HiveNav() {
+  const { userStore, postStore } = useStore();
 
   const navigate = useNavigate();
 
@@ -40,7 +36,7 @@ function HiveNav({openForm}: Props) {
             <div className="logo-header">
               <img src={HiveoneyComb} className="logo-img" alt="Logo img" />
               <h2 className="logo">
-                <a href="/">Hive</a>
+                <a href="/hive">Hive</a>
               </h2>
             </div>
 
@@ -58,13 +54,13 @@ function HiveNav({openForm}: Props) {
 
             {/* Create Post and User Profile */}
             <div className="create">
-              <Link to='' onClick={openForm} className="btn-hive btn-primary-hive create-post-btn">
+              <Link to='' onClick={() => postStore.openForm()} className="btn-hive btn-primary-hive create-post-btn">
                   Create 
               </Link>
 
               {/* User Profile Picture */}
               <div className="profile-picture">
-                <Link to="/hive/user-profile">
+                <Link to={`/hive/user-profile/${userStore.user?.username}`}>
                     <img className="image" src={userStore.user?.image || DefaultImg} alt="avatar" />
                 </Link>
               </div>
