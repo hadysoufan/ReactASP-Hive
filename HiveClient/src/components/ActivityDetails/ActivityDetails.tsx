@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useStore } from "../../app/stores/store.ts";
 import Loader from "../Loader/Loader.component";
 import { observer } from "mobx-react-lite";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ActivityDetaledHeader from "./ActivityDetaledHeader.tsx";
 import ActivityDetailedInfo from "./ActivityDetailedInfo.tsx";
 import ActivityDetailedChat from "./ActivityDetailedChat.tsx";
@@ -12,18 +12,24 @@ import { Grid } from "semantic-ui-react";
 import './ActivityDetails.styles.css';
 import LeftSection from '../LeftSection/LeftSection.component.jsx'
 
+/**
+ * A React component for displaying detailed information about a specific activity.
+ * @component
+ */
 function ActivityDetails() {
   const { activityStore } = useStore();
   const {
     selectedActivity: activity,
     loadActivity,
     loadingInitial,
+    clearSelectedActivity
   } = activityStore;
   const { id } = useParams();
 
   useEffect(() => {
     if (id) loadActivity(id);
-  }, [id, loadActivity]);
+    return () => clearSelectedActivity();
+  }, [id, loadActivity, clearSelectedActivity]);
 
   if (loadingInitial || !activity) return <Loader />;
 
@@ -31,16 +37,16 @@ function ActivityDetails() {
     <>
       <ActivitynavComponent />
       
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', margin:'15rem 0' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin:'10rem 0' }}>
       
       <Grid>
       <Grid.Column width={4}>
       <LeftSection />
         </Grid.Column>
         <Grid.Column width={8}>
-          <ActivityDetaledHeader activity={activity} />
+          <ActivityDetaledHeader activity={activity} /> 
           <ActivityDetailedInfo activity={activity} />
-          <ActivityDetailedChat />
+          <ActivityDetailedChat activityId={activity.id} />
         </Grid.Column>
         <Grid.Column width={4}>
           <ActivityDetailedSideBar activity={activity} />
