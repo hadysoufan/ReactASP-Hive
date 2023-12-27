@@ -22,6 +22,8 @@ export default class ProfileStore {
    */
   loadingProfile = false;
 
+  uploading = false;
+
   /**
    * Creates an instance of the ProfileStore.
    * Initializes MobX auto-observable functionality for reactive updates.
@@ -53,19 +55,42 @@ export default class ProfileStore {
   loadProfile = async (username: string): Promise<void> => {
     this.loadingProfile = true;
     try {
-      // Fetch the user profile from the backend
       const profile = await agent.Profiles.get(username);
 
-      // Update the profile in the store using MobX actions
       runInAction(() => {
         this.profile = profile;
         this.loadingProfile = false;
       });
     } catch (error) {
       console.log(error);
-
-      // Handle errors and reset loading state
       runInAction(() => (this.loadingProfile = false));
+    }
+  };
+
+   /**
+   * Uploads a photo to the user's profile.
+   * @memberof ProfileStore
+   * @async
+   * @param {Blob} file - The image file to be uploaded.
+   */
+  uploadPhoto = async (file: Blob) => {
+    this.uploading = true;
+    try {
+      const repsonse = await agent.Profiles.uploadPhoto(file);
+      const photo = repsonse.data;
+      runInAction(() => {
+        if (this.profile) {
+          this.profile.photos?.push(photo);
+          if (photo.isMain && store.userStore.user) {
+            store.userStore.setImage(photo.url);
+            this.profile.image = photo.url;
+          }
+        }
+        this.uploading = false;
+      });
+    } catch (error) {
+      console.log(error);
+      runInAction(() => (this.uploading = false));
     }
   };
 }
