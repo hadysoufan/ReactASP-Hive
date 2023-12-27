@@ -20,12 +20,20 @@ class ActivityStore {
     makeAutoObservable(this);
   }
 
+  /**
+   * Get activities sorted by date.
+   * @returns {Activity[]} - Array of activities sorted by date.
+   */
   get activitiesByDate() {
     return Array.from(this.activityRegistry.values()).sort(
       (a, b) => a.date!.getTime() - b.date!.getTime()
     );
   }
 
+  /**
+   * Get activities grouped by date.
+   * @returns {[string, Activity[]][]} - Array of key-value pairs representing grouped activities.
+   */
   get groupedActivities() {
     return Object.entries(
       this.activitiesByDate.reduce((activities, activity) => {
@@ -87,23 +95,23 @@ class ActivityStore {
   };
 
   /**
- * Retrieves an activity from the registry by its ID.
- * @memberof ActivityStore
- * @private
- * @param {string} id - The ID of the activity to be retrieved.
- * @returns {Activity | undefined} - The activity with the specified ID or undefined if not found.
- */
+   * Retrieves an activity from the registry by its ID.
+   * @memberof ActivityStore
+   * @private
+   * @param {string} id - The ID of the activity to be retrieved.
+   * @returns {Activity | undefined} - The activity with the specified ID or undefined if not found.
+   */
   private getActivity = (id: string) => {
     return this.activityRegistry.get(id);
   };
 
   /**
- * Sets and updates properties of an activity in the registry.
- * Populates additional information such as attendance status and host details.
- * @memberof ActivityStore
- * @private
- * @param {Activity} activity - The activity object to be set in the registry.
- */
+   * Sets and updates properties of an activity in the registry.
+   * Populates additional information such as attendance status and host details.
+   * @memberof ActivityStore
+   * @private
+   * @param {Activity} activity - The activity object to be set in the registry.
+   */
   private setActivity = (activity: Activity) => {
     const user = store.userStore.user;
     if (user) {
@@ -255,6 +263,13 @@ class ActivityStore {
     } finally {
       runInAction(() => (this.loading = false));
     }
+  };
+
+  /**
+   * Clear the currently selected activity.
+   */
+  clearSelectedActivity = () => {
+    this.selectedActivity = undefined;
   };
 }
 
