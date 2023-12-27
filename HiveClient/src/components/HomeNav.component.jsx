@@ -7,7 +7,7 @@ function HomeNavBar() {
       <nav className="navbar navbar-expand-md fixed-top navbar-shrink py-3 navbar-light" id="mainNav">
         <div className="container">
           {/* Home link with active class */}
-          <NavLink to="/" className="navbar-brand d-flex align-items-center" activeClassName="active">
+          <NavLink to="/" className="navbar-brand d-flex align-items-center" activeclassname="active">
             <span>Hive</span>
           </NavLink>
 
@@ -19,13 +19,13 @@ function HomeNavBar() {
           <div className="collapse navbar-collapse" id="navcol-1">
             <ul className="navbar-nav mx-auto">
               {/* Home link with active class */}
-              <li className="nav-item"><NavLink to="/" className="nav-link" activeClassName="active" exact>Home</NavLink></li>
+              <li className="nav-item"><NavLink to="/" className="nav-link" activeclassname="active" exact="true">Home</NavLink></li>
 
               {/* Contacts link with active class */}
-              <li className="nav-item"><NavLink to="/contacts" className="nav-link" activeClassName="active">Contacts</NavLink></li>
+              <li className="nav-item"><NavLink to="/contacts" className="nav-link" activeclassname="active">Contacts</NavLink></li>
 
               {/* Login link with active class */}
-              <li className="nav-item"><NavLink to="/login" className="nav-link" activeClassName="active">Login</NavLink></li>
+              <li className="nav-item"><NavLink to="/login" className="nav-link" activeclassname="active">Login</NavLink></li>
             </ul>
 
             {/* Sign up link */}
