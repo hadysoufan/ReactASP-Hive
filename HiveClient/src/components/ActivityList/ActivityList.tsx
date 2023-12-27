@@ -6,7 +6,10 @@ import ActivityListItem from "../ActivityDashboard/ActivityListItem.tsx";
 import { Header } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 
-
+/**
+ * Component for displaying a list of activities grouped by date.
+ * @component
+ */
 function ActivityList() {
   const { activityStore } = useStore();
   const { groupedActivities } = activityStore;
@@ -15,7 +18,7 @@ function ActivityList() {
     <>
       {groupedActivities.map(([group, activities]) => (
         <Fragment key={group}>
-          <Header sub color='teal'>
+          <Header sub color='orange'>
             {group}
           </Header>
               {activities.map(activity => (
