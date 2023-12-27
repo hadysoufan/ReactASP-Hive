@@ -10,6 +10,12 @@ interface Props {
   activity: Activity;
 }
 
+/**
+ * A React component for displaying the sidebar of detailed information about attendees of an activity.
+ * @component
+ * @param {Props} props - The component properties.
+ * @param {Activity} props.activity - The activity for which to display the sidebar.
+ */
 function ActivityDetailedSideBar({ activity: { attendees, host } }: Props) {
   if (!attendees) return null;
   return (
@@ -20,7 +26,7 @@ function ActivityDetailedSideBar({ activity: { attendees, host } }: Props) {
         attached="top"
         secondary
         inverted
-        color="teal"
+        color="orange"
       >
         {attendees.length} {attendees.length === 1 ? "Person" : "People"} going
       </Segment>
