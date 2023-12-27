@@ -85,12 +85,15 @@ export const UnameVerified = styled.div`
 `;
 
 export const EditBtn = styled.button`
-    margin: 1em;
-    border-radius: 3px;
+width:8rem;
+height:auto;
+font-size: 1.2rem;
+    margin: 1em !important;
+    border-radius: 3px !important;
     border: 1px solid ${({ theme }) => theme.colors.button};
     background-color: ${({ theme }) => theme.colors.button};
-    padding: .4em .6em;
-    cursor: pointer;
+    padding: .4em !important;
+    cursor: pointer !important;
     color: ${({ theme }) => theme.colors.light};
         &:hover {
         background-color: var(--orange);
@@ -123,7 +126,7 @@ export const UserStories = styled.div`
 	height: 10rem;
 	position:relative;
 	top:-25rem;
-	left:25rem;
+	left:28rem;
 `;
 
 export const UserStoriesInner = styled.div`
