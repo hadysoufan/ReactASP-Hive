@@ -135,9 +135,6 @@ body {
 			display: none;
 		}
 	}
-	.mobile-navbar {
-		display: flex;
-	}
 	main {
 		.hive-container {
 			grid-template-columns: 0 auto 5rem;
