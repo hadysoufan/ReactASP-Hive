@@ -8,14 +8,19 @@ import { format } from 'date-fns';
 interface Props {
     activity: Activity
 }
-
+/**
+ * A React component for displaying detailed information about an activity.
+ * @component
+ * @param {Props} props - The component properties.
+ * @param {Activity} props.activity - The activity for which to display detailed information.
+ */
 function ActivityDetailedInfo({activity}: Props) {
   return (
         <Segment.Group>
             <Segment attached='top'>
                 <Grid>
                     <Grid.Column width={1}>
-                        <Icon size='large' color='teal' name='info'/>
+                        <Icon size='large' color='orange' name='info'/>
                     </Grid.Column>
                     <Grid.Column width={15}>
                         <p>{activity.description}</p>
@@ -25,7 +30,7 @@ function ActivityDetailedInfo({activity}: Props) {
             <Segment attached>
                 <Grid verticalAlign='middle'>
                     <Grid.Column width={1}>
-                        <Icon name='calendar' size='large' color='teal'/>
+                        <Icon name='calendar' size='large' color='orange'/>
                     </Grid.Column>
                     <Grid.Column width={15}>
             <span>
@@ -37,7 +42,7 @@ function ActivityDetailedInfo({activity}: Props) {
             <Segment attached>
                 <Grid verticalAlign='middle'>
                     <Grid.Column width={1}>
-                        <Icon name='marker' size='large' color='teal'/>
+                        <Icon name='marker' size='large' color='orange'/>
                     </Grid.Column>
                     <Grid.Column width={11}>
                         <span>{activity.venue}, {activity.city}</span>
