@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,14 +40,24 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapHub<ChatHub>("/chat");
 
+
 app.UseHttpsRedirection();
 
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 
+app.UseStaticFiles(new StaticFileOptions
+{
+FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "Images")),
+RequestPath = "/images"
+});
+
+
+
 try
-    {
+{
         var context = services.GetRequiredService<DataContext>();
         var userManager = services.GetRequiredService<UserManager<AppUser>>();
         await context.Database.MigrateAsync();
