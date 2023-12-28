@@ -1,20 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Interface;
 using Domain.Entities;
-using Application.Interface;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    /// <summary>
+    /// Controller for managing posts in the API.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class PostController : ControllerBase
     {
         private readonly IPostAccessor _postService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PostController"/> class.
+        /// </summary>
+        /// <param name="postService">The post accessor service.</param>
         public PostController(IPostAccessor postService)
         {
             _postService = postService;
         }
 
+        /// <inheritdoc/>
+        /// Post: api/post
         [HttpPost]
         public async Task<ActionResult<Post>> AddPost([FromForm] IFormFile file, [FromForm] string description)
         {
@@ -34,7 +43,8 @@ namespace API.Controllers
             return CreatedAtAction(nameof(GetPost), new { id = post.Id }, post);
         }
 
-        // GET endpoint to retrieve a post by ID (if needed)
+        /// <inheritdoc/>
+        /// Get: api/post/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<Post>> GetPost(Guid id)
         {
@@ -48,6 +58,8 @@ namespace API.Controllers
             return post;
         }
 
+        /// <inheritdoc/>
+        /// Get: api/post
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Post>>> GetAllPosts()
         {
@@ -55,6 +67,8 @@ namespace API.Controllers
             return Ok(posts);
         }
 
+        /// <inheritdoc/>
+        /// Delete: api/post/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePost(Guid id)
         {
