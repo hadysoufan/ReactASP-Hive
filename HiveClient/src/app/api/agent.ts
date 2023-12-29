@@ -1,10 +1,12 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { Activity, ActivityFormValues } from "../models/activity";
 import { User, UserFormValues } from "../models/user";
 import { store } from "../stores/store.ts";
 import { Post } from "../models/post.ts";
 import { Photo, Profile } from "../models/profile.ts";
-
+import { Product } from "../models/products.ts";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 /**
  * Function to introduce a delay using Promises.
  * @param {number} delay - The delay in milliseconds.
@@ -15,8 +17,6 @@ const sleep = (delay: number): Promise<void> => {
     setTimeout(resolve, delay);
   });
 };
-
-
 
 // Configuring the base URL for Axios requests
 axios.defaults.baseURL = "http://localhost:5000/api";
@@ -33,37 +33,33 @@ axios.interceptors.request.use((config) => {
 /**
  * Axios response interceptor to introduce a delay and handle common HTTP errors.
  */
-axios.interceptors.response.use(async (response) => {
-  return sleep(500)
-    .then(() => {
-      return response;
-    })
-    .catch((error) => {
-      console.log(error);
-      return Promise.reject(error);
-    });
-});
-
-// , (error: AxiosError) => {
-//   const { data, status } = error.response!;
-//   switch (status) {
-//     case 400:
-//       toast.error('Bad Request');
-//       break;
-//     case 401:
-//       toast.error('Unauthorized');
-//       break;
-//     case 403:
-//       toast.error('Forbidden');
-//       break;
-//     case 404:
-//       toast.error('Not Found');
-//       break;
-//     case 500:
-//       toast.error('Server Error');
-//       break;
-//   }
-//   return Promise.reject(error)
+axios.interceptors.response.use(
+  async (response) => {
+    await sleep(1000);
+    return response;
+  },
+  (error: AxiosError) => {
+    const { data, status } = error.response!;
+    switch (status) {
+      case 400:
+        toast.error("bad request");
+        break;
+      case 401:
+        toast.error("unauthorized");
+        break;
+      case 403:
+        toast.error("forbidden");
+        break;
+      case 404:
+        toast.error("not found");
+        break;
+      case 500:
+        toast.error("server error");
+        break;
+    }
+    return Promise.reject(error);
+  }
+);
 
 /**
  * Function to extract the response data from an Axios response.
@@ -98,7 +94,7 @@ const Activities = {
     requests.put<void>(`/activities/${activity.id}`, activity),
   delete: (id: string): Promise<void> =>
     requests.del<void>(`/activities/${id}`),
-  attend: (id: string) => requests.post<void>(`/activities/${id}/attend`, {})
+  attend: (id: string) => requests.post<void>(`/activities/${id}/attend`, {}),
 };
 
 /**
@@ -124,6 +120,12 @@ const Posts = {
   delete: (id: string): Promise<void> => requests.del<void>(`/post/${id}`),
 };
 
+const Products = {
+  list: (): Promise<Product[]> => requests.get<Product[]>("/products"),
+  details: (id: string): Promise<Product> =>
+    requests.get<Product>(`/products/${id}`),
+};
+
 /**
  * Object containing methods for interacting with 'Photo' API.
  */
@@ -131,12 +133,16 @@ const Profiles = {
   get: (username: string) => requests.get<Profile>(`/profile/${username}`),
   uploadPhoto: (file: Blob) => {
     let formData = new FormData();
-    formData.append('File', file);
-    return axios.post<Photo>('photo', formData, {
-      headers: {'Content-Type': 'multipart/form-data'}
-    })
-  } 
-}
+    formData.append("File", file);
+    return axios.post<Photo>("photo", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  },
+  updateFollowing: (username: string) =>
+    requests.post(`/follow/${username}`, {}),
+  listFollowings: (username: string, predicate: string) =>
+    requests.get<Profile[]>(`/follow/${username}?predicate=${predicate}`),
+};
 
 /**
  * Main agent object for all objects.
@@ -145,7 +151,8 @@ const agent = {
   Activities,
   Account,
   Posts,
-  Profiles
+  Profiles,
+  Products,
 };
 
 export default agent;
