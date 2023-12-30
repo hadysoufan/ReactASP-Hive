@@ -180,8 +180,17 @@ namespace Persistence.Migrations
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsMain")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Owner")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
@@ -199,23 +208,36 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("OwnerName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
-
                     b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("Domain.Entities.PostUser", b =>
+                {
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("isOwner")
+                        .HasColumnType("bit");
+
+                    b.HasKey("AppUserId", "PostId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("PostUsers");
                 });
 
             modelBuilder.Entity("Domain.Entities.Product", b =>
@@ -441,13 +463,23 @@ namespace Persistence.Migrations
                         .HasForeignKey("AppUserId");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Post", b =>
+            modelBuilder.Entity("Domain.Entities.PostUser", b =>
                 {
                     b.HasOne("Domain.Entities.AppUser", "AppUser")
                         .WithMany("Posts")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Post", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("AppUser");
+
+                    b.Navigation("Post");
                 });
 
             modelBuilder.Entity("Domain.Entities.UserFollowing", b =>
@@ -455,11 +487,13 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Entities.AppUser", "Observer")
                         .WithMany("Followings")
                         .HasForeignKey("ObserverId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.AppUser", "Target")
                         .WithMany("Followers")
                         .HasForeignKey("TargetId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Observer");

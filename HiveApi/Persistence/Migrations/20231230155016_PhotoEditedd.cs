@@ -5,25 +5,24 @@
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class AddCancelledProp : Migration
+    public partial class PhotoEditedd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "IsCancelled",
-                table: "Activities",
-                type: "bit",
-                nullable: false,
-                defaultValue: false);
+            migrationBuilder.AddColumn<string>(
+                name: "Owner",
+                table: "Photos",
+                type: "nvarchar(max)",
+                nullable: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "IsCancelled",
-                table: "Activities");
+                name: "Owner",
+                table: "Photos");
         }
     }
 }
