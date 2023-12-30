@@ -1,109 +1,50 @@
-import React, { useState } from "react";
-import {
-  Feeds,
-  Edit,
-  DropDown,
-  Modal,
-  CloseIcon,
-  ModalContent,
-} from "./PostList.component.styles";
-import { useStore } from "../../app/stores/store.ts";
+import React, { useState, useEffect } from "react";
+import { Feeds } from "./PostList.component.styles";
 import { Link } from "react-router-dom";
 import DefaultImg from "../../asset/img/hive/default.png";
-import { Post } from "../../app/models/post";
 import Profile1 from "../../asset/img/hive/profile-1.jpg";
 import Profile2 from "../../asset/img/hive/profile-2.jpg";
 import Profile3 from "../../asset/img/hive/profile-3.jpg";
+import { useStore } from "../../app/stores/store.ts";
+import { observer } from "mobx-react-lite";
+import Loader from '../Loader/Loader.component.jsx';
+import { Photo } from "../../app/models/photos.ts";
 
-interface Props {
-  posts: Post[];
-  post: Post | undefined;
-  // selectPost: Post;
-  // openForm: (id: string) => void;
-  //deleteActivity: (id: string) => void;
+interface Props{
+  photos: Photo[] ;
 }
 
-function PostList({ posts, post: selectedPost }: Props) {
-  const initialState = selectedPost ?? {
-    id: "",
-    image: "",
-    date: "",
-    description: "",
-  };
-
-  const [post, setPost] = useState(initialState);
-  const [editedDescription, setEditedDescription] = useState("");
-
-  function handleSubmit() {
-    setPost({ ...post, description: editedDescription });
-    console.log(post);
-    closeModal();
-  }
-
-  const { userStore } = useStore();
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<Post | null>(null);
-  const [isEditMode, setIsEditMode] = useState(false);
-
-  const openModal = (post: Post, editMode: boolean = false) => {
-    setIsModalOpen(true);
-    setModalContent(post);
-    setIsEditMode(editMode);
-    setEditedDescription(post.description);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setModalContent(null);
-    setIsEditMode(false);
-  };
-
+function PostList({photos}: Props) {
   return (
     <>
       <Feeds>
-        {posts.map((post) => (
-          <div key={post.id} className="feed">
+        
+        {photos.map((photo) => (
+          <div className="feed" key={photo.id}>
             <div className="head">
               <div className="user">
                 <div className="profile-picture">
                   <img
-                    className="image"
-                    src={userStore.user?.image || DefaultImg}
+                    className="profile-image-post"
+                    src={DefaultImg}
                     alt="avatar"
                   />
                 </div>
                 <div className="info">
                   <h3>
-                    <Link to="/hive/user-profile">
-                      {userStore.user?.username}
-                    </Link>
+                    <Link to="/hive/user-profile">{photo.owner}</Link>
                   </h3>
-                  <small>{post.date}</small>
+                  <small>{photo.date}</small>
                 </div>
               </div>
-              <Edit>
-                <i className="uil uil-ellipsis-h"></i>
-                <DropDown>
-                  <li onClick={() => openModal(post, true)}>
-                    <a>Edit</a>
-                  </li>
-                  <li>
-                    <a href="/">Delete</a>
-                  </li>
-                </DropDown>
-              </Edit>
             </div>
 
             {/* Photo */}
-            <div className="photo">
-              <img
-                onClick={() => openModal(post)}
-                className="image"
-                src={post.image}
-                alt=""
-              />
-            </div>
+            <Link to={`/hive/photo-details/${photo.id}`}>
+              <div className="photo">
+                <img className="image" src={photo.url} alt="" />
+              </div>
+            </Link>
 
             <div className="action-button">
               <div className="interaction-buttons">
@@ -142,55 +83,15 @@ function PostList({ posts, post: selectedPost }: Props) {
                 <b>
                   <a href="/">hadysoufan</a>
                 </b>{" "}
-                {isEditMode ? post.description : editedDescription}
+                {photo.description}
               </p>
             </div>
-
             <div className="comments text-muted"> View all 277 comments</div>
-          </div>
-        ))}
+          </div> 
+          ))}
       </Feeds>
-
-      {/* Modal Component */}
-      {isModalOpen && modalContent && (
-        <Modal isModalOpen={isModalOpen}>
-          <ModalContent>
-            <CloseIcon onClick={closeModal}>X</CloseIcon>
-            <img
-              src={modalContent.image}
-              style={{ width: "100%" }}
-              alt="Card"
-            />
-            <div className="feed-title">
-              <Link to="/hive/user-profile">
-                <div className="feed-into-title">
-                  {userStore.user?.username}
-                </div>
-              </Link>
-            </div>
-
-            {isEditMode ? (
-              <div className="feed-content" style={{}}>
-                <textarea
-                  value={editedDescription}
-                  onChange={(e) => setEditedDescription(e.target.value)}
-                />
-                <button className="btn btn-primary" onClick={handleSubmit}>
-                  Submit
-                </button>
-              </div>
-            ) : (
-              <div className="feed-content" style={{}}>
-                <div className="feed-into-content">
-                  {modalContent.description}
-                </div>
-              </div>
-            )}
-          </ModalContent>
-        </Modal>
-      )}
     </>
   );
 }
 
-export default PostList;
+export default observer(PostList);
