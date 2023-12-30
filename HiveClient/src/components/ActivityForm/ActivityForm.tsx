@@ -28,7 +28,6 @@ function ActivityForm() {
   const {
     createActivity,
     updateActivity,
-    loading,
     loadActivity,
     loadingInitial,
   } = activityStore;

@@ -26,6 +26,7 @@ function ActivityDetails() {
   } = activityStore;
   const { id } = useParams();
 
+  
   useEffect(() => {
     if (id) loadActivity(id);
     return () => clearSelectedActivity();

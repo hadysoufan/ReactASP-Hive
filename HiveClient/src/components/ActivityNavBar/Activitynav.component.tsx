@@ -12,8 +12,6 @@ import { toast } from "react-toastify";
 function ActivityNav() {
     const { userStore } = useStore();
 
-    const {activityStore} = useStore();
-
     const navigate = useNavigate();
   
     const handleLogout = async () => {
@@ -69,7 +67,8 @@ function ActivityNav() {
                   <button className="dropdown-btn">
                     <ion-icon name="ellipsis-vertical-outline"></ion-icon>
                   </button>
-                  {/* Dropdown Content */}
+
+
                   <div className="dropdown-content">
                     <Link to='' onClick={handleLogout}>
                       Logout

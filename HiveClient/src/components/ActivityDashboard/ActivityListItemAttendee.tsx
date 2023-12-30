@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Image, List, Popup } from "semantic-ui-react";
-import Profile1 from "../../asset/img/hive/profile-1.jpg";
+import DefaultImg from "../../asset/img/hive/default.png";
 import { observer } from "mobx-react-lite";
 import { Profile } from "../../app/models/profile";
 import { Link } from "react-router-dom";
@@ -11,6 +11,11 @@ interface Props {
 }
 
 function ActivityListItemAttendee({ attendees }: Props) {
+  const styles = {
+    borderColor: "orange",
+    borderWidth: 3,
+  };
+
   const popupRef = useRef(null);
 
   return (
@@ -23,12 +28,18 @@ function ActivityListItemAttendee({ attendees }: Props) {
             on="hover"
             trigger={
               <Link to={`/hive/user-profile/${attendee.username}`}>
-                <Image size="mini" circular src={attendee.image || Profile1} />
+                <Image
+                  bordered
+                  style={attendee.following ? styles : null}
+                  size="mini"
+                  circular
+                  src={attendee.image || DefaultImg}
+                />
               </Link>
             }
           >
             <Popup.Content>
-              <ProfileCard profile={attendee} />
+            <ProfileCard profile={attendee} />
             </Popup.Content>
           </Popup>
         </List.Item>

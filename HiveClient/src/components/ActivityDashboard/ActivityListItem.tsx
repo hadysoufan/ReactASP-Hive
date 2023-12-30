@@ -12,8 +12,6 @@ interface Props {
 }
 
 function ActivityListItem({ activity }: Props) {
-  const { activityStore } = useStore();
-  const { deleteActivity, loading } = activityStore;
 
   return (
     <>
