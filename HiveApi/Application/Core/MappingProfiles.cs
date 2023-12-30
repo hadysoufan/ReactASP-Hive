@@ -1,5 +1,6 @@
 ﻿using Application.Activities;
 using Application.Comments;
+using Application.Photos;
 using AutoMapper;
 using Domain.Entities;
 
@@ -36,6 +37,10 @@ namespace Application.Core
                 .ForMember(d => d.Following, o => o.MapFrom(s => s.Followers.Any(x => x.Observer.UserName == currentUsername)));
 
             CreateMap<Post, Post>();
+
+            CreateMap<Photo, Photo>();
+            CreateMap<Photo, PhotoDTO>();
+            
 
             CreateMap<Comment, CommentDTO>()
                 .ForMember(d => d.DisplayName, o => o.MapFrom(s => s.Author.DisplayName))
