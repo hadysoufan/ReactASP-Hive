@@ -52,26 +52,40 @@ namespace Application.Photos
             /// <returns>A result indicating success or failure.</returns>
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                var user = await _context.Users.Include(p => p.Photos)
-                    .FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
+                //var user = await _context.Users.Include(p => p.Photos)
+                //    .FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
 
-                if (user is null) return null;
+                //if (user is null) return null;
 
-                var photo = user.Photos.FirstOrDefault(x => x.Id == request.Id);
+                //var photo = user.Photos.FirstOrDefault(x => x.Id == request.Id);
 
-                if (photo is null) return null;
+                //if (photo is null) return null;
 
-                if (photo.IsMain) return Result<Unit>.Failure("You cannot delete your main photo");
+                //if (photo.IsMain) return Result<Unit>.Failure("You cannot delete your main photo");
 
-                var result = await _photoAccessor.DeletePhoto(photo.Id);
+                //var result = await _photoAccessor.DeletePhoto(photo.Id);
 
-                user.Photos.Remove(photo);
+                //user.Photos.Remove(photo);
+                //_context.Remove(photo);
 
-                var success = await _context.SaveChangesAsync() > 0;
+                //var success = await _context.SaveChangesAsync() > 0;
 
-                if (success) return Result<Unit>.Success(Unit.Value);
+                //if (success) return Result<Unit>.Success(Unit.Value);
 
-                return Result<Unit>.Failure("Problem deleting the photo from API");
+                //return Result<Unit>.Failure("Problem deleting the photo from API");
+                var photo = await _context.Photos.FindAsync(request.Id);
+
+                if (photo is null)
+                    return Result<Unit>.Failure("photo not found");
+
+                _context.Remove(photo);
+
+                var result = await _context.SaveChangesAsync(cancellationToken) > 0;
+
+                if (!result)
+                    return Result<Unit>.Failure("Failed to delete photo");
+
+                return Result<Unit>.Success(Unit.Value);
             }
         }
     }

@@ -22,6 +22,7 @@ namespace Application.Photos
             /// Gets or sets the photo file to be added.
             /// </summary>
             public IFormFile File { get; set; }
+            public string Description { get; set; }
         }
 
         /// <summary>
@@ -64,7 +65,10 @@ namespace Application.Photos
                 var photo = new Photo
                 {
                     Url = photoUploadResult.Url,
-                    Id = photoUploadResult.PublicId
+                    Id = photoUploadResult.PublicId,
+                    Description = request.Description, 
+                    Owner = user.DisplayName,
+                    Date = DateTime.Now
                 };
 
                 if (!user.Photos.Any(x => x.IsMain)) photo.IsMain = true;
@@ -77,6 +81,8 @@ namespace Application.Photos
 
                 return Result<Photo>.Failure("Problem adding photo");
             }
+
+
         }
     }
 }

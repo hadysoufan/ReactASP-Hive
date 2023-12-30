@@ -8,7 +8,7 @@ namespace Application.Photos
     public class PhotoUploadResult
     {
         /// <summary>
-        /// Gets or sets the public ID associated with the uploaded photo.
+        /// Gets or sets the public ID associated with the uploaded photo. 
         /// </summary>
         public string PublicId { get; set; }
 
@@ -16,5 +16,7 @@ namespace Application.Photos
         /// Gets or sets the URL of the uploaded photo.
         /// </summary>
         public string Url { get; set; }
+
+        public string Description { get; set; }
     }
 }
