@@ -38,6 +38,8 @@ namespace Persistence
         /// </summary>
         public DbSet<Post> Posts { get; set; }
 
+        public DbSet<PostUser> PostUsers { get; set; }
+
         /// <summary>
         /// Gets or sets the DbSet for products.
         /// </summary>
@@ -76,13 +78,6 @@ namespace Persistence
                 .WithMany(a => a.Attendees)
                 .HasForeignKey(aa => aa.ActivityId);
 
-            // Configure the relationship between Post and User
-            builder.Entity<Post>()
-                .HasOne(c => c.AppUser)
-                .WithMany(p => p.Posts)
-                .HasForeignKey(c => c.AppUserId);
-
-
             // Configure the relationship between Comment and Activity
             builder.Entity<Comment>()
                 .HasOne(c => c.Activity)
@@ -97,13 +92,29 @@ namespace Persistence
 
                 b.HasOne(o => o.Observer)
                 .WithMany(f => f.Followings)
-                .HasForeignKey(o => o.ObserverId);
+                .HasForeignKey(o => o.ObserverId)
+                .OnDelete(DeleteBehavior.Cascade);
 
                 b.HasOne(o => o.Target)
                 .WithMany(f => f.Followers)
-                .HasForeignKey(o => o.TargetId);
+                .HasForeignKey(o => o.TargetId)
+                .OnDelete(DeleteBehavior.Restrict);
             });
 
+            builder.Entity<PostUser>()
+                        .HasKey(pu => new { pu.AppUserId, pu.PostId });
+
+            // Configuring the relationship between Post and PostUser
+            builder.Entity<PostUser>()
+            .HasOne(pu => pu.Post)
+            .WithMany()
+            .HasForeignKey(pu => pu.PostId);
+
+            // Configuring the relationship between AppUser and PostUser
+            builder.Entity<PostUser>()
+            .HasOne(pu => pu.AppUser)
+            .WithMany(u => u.Posts)
+            .HasForeignKey(pu => pu.AppUserId);
         }
     }
 }

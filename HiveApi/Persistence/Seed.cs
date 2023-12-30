@@ -235,15 +235,15 @@ namespace Persistence
                     }
                 }; 
 
-                var posts = new List<Post>
-            {
-                new Post
-                {
-                    Image = null,
-                    Date = DateTime.UtcNow.AddMonths(-2),
-                    Description = "Post 2 months ago"
-                }                
-            };
+            //    var posts = new List<Post>
+            //{
+            //    new Post
+            //    {
+            //        Image = null,
+            //        Date = DateTime.UtcNow.AddMonths(-2),
+            //        Description = "Post 2 months ago"
+            //    }                
+            //};
 
                 var products = new List<Product>
             {
@@ -311,7 +311,7 @@ namespace Persistence
             };
 
                 await context.Activities.AddRangeAsync(activities);
-                await context.Posts.AddRangeAsync(posts);
+                //await context.Posts.AddRangeAsync(posts);
                 await context.Products.AddRangeAsync(products);
                 await context.SaveChangesAsync();
             };
