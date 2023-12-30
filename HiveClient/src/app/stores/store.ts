@@ -6,6 +6,7 @@ import ModalStore from "./modalStore.ts";
 import ProfileStore from "./profileStore.ts";
 import PostStore from "./postStore.ts";
 import CommentStore from "./commentStore.ts";
+import PhotoStore from "./photoStore.ts";
 
 /**
  * Interface representing the combined stores available in the application.
@@ -22,6 +23,7 @@ interface Store {
   profileStore: ProfileStore;
   postStore: PostStore;
   commentStore: CommentStore;
+  photoStore: PhotoStore;
 }
 
 /**
@@ -37,6 +39,7 @@ export const store: Store = {
   profileStore: new ProfileStore(),
   postStore: new PostStore(),
   commentStore: new CommentStore(),
+  photoStore: new PhotoStore(),
 };
 
 /**
