@@ -7,6 +7,7 @@ import { Photo, Profile } from "../models/profile.ts";
 import { Product } from "../models/products.ts";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { PhotoFormValues } from "../models/photos.ts";
 /**
  * Function to introduce a delay using Promises.
  * @param {number} delay - The delay in milliseconds.
@@ -111,13 +112,23 @@ const Account = {
 /**
  * Object containing methods for interacting with 'Post' API.
  */
-const Posts = {
-  list: (): Promise<Post[]> => requests.get<Post[]>("/post"),
-  details: (id: string): Promise<Post> => requests.get<Post>(`/post/${id}`),
-  create: (post: Post): Promise<void> => requests.post<void>("/post", post),
-  update: (post: Post): Promise<void> =>
-    requests.put<void>(`/post/${post.id}`, post),
-  delete: (id: string): Promise<void> => requests.del<void>(`/post/${id}`),
+// const Posts = {
+//   list: (): Promise<Post[]> => requests.get<Post[]>("/photo"),
+//   details: (id: string): Promise<Post> => requests.get<Post>(`/post/${id}`),
+//   create: (post: Post): Promise<void> => requests.post<void>("/post", post),
+//   update: (post: Post): Promise<void> =>
+//     requests.put<void>(`/post/${post.id}`, post),
+//   delete: (id: string): Promise<void> => requests.del<void>(`/post/${id}`),
+// };
+
+const Photos = {
+  list: (): Promise<Photo[]> => requests.get<Photo[]>("/photo"),
+  details: (id: string): Promise<Photo> => requests.get<Photo>(`/photo/${id}`),
+  delete: (id: string): Promise<void> => requests.del<void>(`/photo/${id}`),
+  update: (photo: PhotoFormValues): Promise<void> =>
+    requests.put<void>(`/photo/${photo.id}`, photo),
+    create: (photo: PhotoFormValues): Promise<void> =>
+    requests.post<void>("/photo", photo),
 };
 
 const Products = {
@@ -150,9 +161,9 @@ const Profiles = {
 const agent = {
   Activities,
   Account,
-  Posts,
   Profiles,
   Products,
+  Photos,
 };
 
 export default agent;
