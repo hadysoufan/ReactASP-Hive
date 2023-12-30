@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import DefaultImg from "../../asset/img/hive/default.png";
 import { useStore } from '../../app/stores/store.ts';
 
@@ -6,6 +6,23 @@ import { useStore } from '../../app/stores/store.ts';
 function CreatePostForm() {
 
     const { userStore } = useStore();
+
+    const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        await userStore.getUser();
+        setUserData(userStore.user);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchUserData();
+  }, [userStore]);
+
+
   return (
     <>
         <form action="" className="create-post-hive">

@@ -54,7 +54,7 @@ function HiveNav() {
 
             {/* Create Post and User Profile */}
             <div className="create">
-              <Link to='' onClick={() => postStore.openForm()} className="btn-hive btn-primary-hive create-post-btn">
+              <Link to='/hive/create' className="btn-hive btn-primary-hive create-post-btn">
                   Create 
               </Link>
 

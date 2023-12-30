@@ -3,7 +3,6 @@ import React from "react";
 import "../../asset/css/hive.styles.scss";
 import "./MiddleSection.component.styles.jsx";
 import { Middle } from "./MiddleSection.component.styles.jsx";
-import PostList from "../PostList/PostList.component.tsx";
 import Stories from "./Stories.component.jsx";
 import CreatePostForm from "./CreatePostForm.tsx";
 import Posts from "../../screens/Posts.screen.tsx";

@@ -71,9 +71,9 @@ function LeftSection() {
         </NavLink>
 
         {/* Notification link */}
-        <Link to='' className="menu-item" id="notifications">
-          <span><ion-icon name="notifications-circle"></ion-icon></span>
-          <h3>Notifications</h3>
+        <Link to='/hive/products' className="menu-item" id="notifications">
+          <span><ion-icon name="storefront-outline"></ion-icon></span>
+          <h3>Market Store</h3>
         </Link>
 
         {/* Message link */}
@@ -109,7 +109,7 @@ function LeftSection() {
       {/* End of side bar */}
 
       {/* Create post button */}
-      <label htmlFor="create-post" className="btn-hive btn-primary-hive">
+      <label className="btn-hive btn-primary-hive">
         Create post
       </label>
     </Left>
