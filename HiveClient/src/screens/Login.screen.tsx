@@ -10,6 +10,7 @@ import Loader from "../components/Loader/Loader.component.jsx";
 import { ErrorMessage, Formik } from "formik";
 import { Button, Form, Label } from "semantic-ui-react";
 import MyTextInput from "../form/MyTextInput.tsx";
+import { toast } from "react-toastify";
 
 function Login() {
   const { userStore } = useStore();
@@ -48,8 +49,10 @@ function Login() {
 
               try {
                 await userStore.login(values);
+                toast.success("Logged in successfully!");
                 navigate('/hive'); 
               } catch (error) {
+                toast.error("Cannot Log in successfully!");
                 setErrors({ error: "Invalid email or password" });
               } finally {
                 setLoading(false);

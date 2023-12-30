@@ -5,11 +5,10 @@ import HomeFooter from "../components/HomeFooter.component.jsx";
 import SignUpSVG from "../asset/img/illustrations/Sign up-rafiki.svg";
 import { useStore } from "../app/stores/store.ts";
 import { ErrorMessage, Formik } from "formik";
-import { Button, Form, Label, Loader } from "semantic-ui-react";
+import { Button, Form, Loader } from "semantic-ui-react";
 import MyTextInput from "../form/MyTextInput.tsx";
 import * as Yup from "yup";
 import ValidationErrors from "../features/errors/ValidationErrors.tsx";
-import { error } from "jquery";
 
 function SignUp() {
   const { userStore } = useStore();
