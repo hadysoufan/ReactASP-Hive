@@ -1,29 +1,24 @@
-import React, { useCallback } from "react";
-import { useDropzone } from "react-dropzone";
+import React, { useCallback } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { Icon, Header } from 'semantic-ui-react';
 
 interface Props {
   setFiles: (files: any) => void;
+  setDescription: (description: string) => void;
 }
 
-/**
- * A React component for handling image drops.
- * @component
- * @param {Props} props - The component properties.
- * @param {(files: any) => void} props.setFiles - Callback function to set the dropped files.
- */
-function PhotoWdigetDropZone({ setFiles }: Props) {
+function PhotoWdigetDropZone({ setFiles, setDescription }: Props) {
   const dzStyles = {
-    border: "dashed 3px #eee",
-    borderColor: "#eee",
-    borderRadius: "5px",
-    paddingTop: "30px",
-    textAlign: "center" as "center",
+    border: 'dashed 3px #eee',
+    borderColor: '#eee',
+    borderRadius: '5px',
+    paddingTop: '30px',
+    textAlign: 'center' as 'center',
     height: 200,
   };
 
   const dzActive = {
-    borderColor: "green",
+    borderColor: 'green',
   };
 
   const onDrop = useCallback(
@@ -42,13 +37,15 @@ function PhotoWdigetDropZone({ setFiles }: Props) {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <div
-      {...getRootProps()}
-      style={isDragActive ? { ...dzStyles, ...dzActive } : dzStyles}
-    >
+    <div {...getRootProps()} style={isDragActive ? { ...dzStyles, ...dzActive } : dzStyles}>
       <input {...getInputProps()} />
       <Icon name='upload' size='huge' />
       <Header content='Drop image here' />
+      <input
+        type='text'
+        placeholder='Description'
+        onChange={(e) => setDescription(e.target.value)}
+      />
     </div>
   );
 }

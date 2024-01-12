@@ -11,4 +11,5 @@ export interface Post {
   image: string;
   date: string;
   description: string;
+  ownerName: string;
 }

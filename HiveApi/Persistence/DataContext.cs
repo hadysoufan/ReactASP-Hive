@@ -55,6 +55,8 @@ namespace Persistence
         /// </summary>
         public DbSet<UserFollowing> UserFollowings { get; set; }
 
+        public DbSet<Basket> Baskets { get; set; }
+
         /// <summary>
         /// Configures the relationships and keys for the entities.
         /// </summary>

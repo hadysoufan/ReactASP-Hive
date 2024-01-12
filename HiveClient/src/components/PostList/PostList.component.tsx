@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Feeds } from "./PostList.component.styles";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import DefaultImg from "../../asset/img/hive/default.png";
 import Profile1 from "../../asset/img/hive/profile-1.jpg";
 import Profile2 from "../../asset/img/hive/profile-2.jpg";
 import Profile3 from "../../asset/img/hive/profile-3.jpg";
-import { useStore } from "../../app/stores/store.ts";
 import { observer } from "mobx-react-lite";
-import Loader from '../Loader/Loader.component.jsx';
 import { Photo } from "../../app/models/photos.ts";
 
 interface Props{
-  photos: Photo[] ;
+  photos: Photo[];
 }
 
 function PostList({photos}: Props) {
+
   return (
     <>
       <Feeds>
@@ -81,7 +80,7 @@ function PostList({photos}: Props) {
             <div className="caption">
               <p>
                 <b>
-                  <a href="/">hadysoufan</a>
+                  <Link to=''>{photo.owner}</Link>
                 </b>{" "}
                 {photo.description}
               </p>

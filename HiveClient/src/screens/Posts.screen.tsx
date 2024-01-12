@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PostDashBoard from "../components/PostDashboard/PostDashBoard.tsx";
 import Loader from "../components/Loader/Loader.component.jsx";
-import { useStore } from "../app/stores/store.ts";
 import { observer } from "mobx-react-lite";
 import axios, { AxiosResponse } from "axios";
 import { Photo } from "../app/models/photos.ts";

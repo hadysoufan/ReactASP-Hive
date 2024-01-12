@@ -1,7 +1,6 @@
-/// <reference types="@ionic/react" />
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginBro from "../asset/img/illustrations/Computer login-bro.svg";
+import LoginBro from "../asset/img/illustrations/login-bro.svg";
 import HomeNavBar from "../components/HomeNav.component.jsx";
 import HomeFooter from "../components/HomeFooter.component.jsx";
 import { useStore } from "../app/stores/store.ts";

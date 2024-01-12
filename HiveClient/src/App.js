@@ -30,6 +30,7 @@ import Products from "./screens/Products.screen.tsx";
 import ProductDetails from "./features/Catalog/ProductDetails.tsx";
 import Catalog from "./features/Catalog/Catalog.tsx";
 import NotFound from "./features/errors/NotFound.tsx";
+import BasketPage from "./features/Basket/BasketPage.tsx";
 
 /**
  * Main App component that defines routes using React Router.
@@ -81,6 +82,8 @@ function App() {
             <Route path='/hive/products' element={<Products />} />
             <Route path='/hive/product/:id' element={<ProductDetails />} />
             <Route path='/hive/products' element={<Catalog />} />
+
+            <Route path='/hive/product/basket' element={<BasketPage />}  />
 
             <Route path="/hive/error" element={<TestErrors />} />
             <Route path="/hive/not-found" element={<NotFound />} />

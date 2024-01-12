@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 
 
 function HiveNav() {
-  const { userStore, postStore } = useStore();
+  const { userStore } = useStore();
 
   const navigate = useNavigate();
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Activity } from "../../app/models/activity";
-import { useStore } from "../../app/stores/store.ts";
 import { Button, Icon, Item, Label, Segment } from "semantic-ui-react";
 import Profile1 from "../../asset/img/hive/profile-1.jpg";
 import { format } from "date-fns";

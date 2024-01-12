@@ -11,7 +11,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <StoreContext.Provider value={store}>
-    <React.StrictMode>
+    <React.StrictMode> 
       <App />
     </React.StrictMode>
   </StoreContext.Provider>

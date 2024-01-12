@@ -8,6 +8,7 @@ namespace API.Controllers
     /// <summary>
     /// Controller for managing activities.
     /// </summary>
+    [AllowAnonymous]
     [ApiController]
     [Route("api/[controller]")]
     public class ActivitiesController : BaseApiController

@@ -17,7 +17,7 @@ namespace Application.Interface
         /// <param name="file">The file to attach to the post.</param>
         /// <param name="description">The description of the post.</param>
         /// <returns>A task that represents the asynchronous operation. The task result contains the newly added post.</returns>
-        Task<Post> AddPostAsync(IFormFile file, string description);
+        Task<Post> CreatePostAsync(Post post, string userId, bool isOwner);
 
         /// <summary>
         /// Retrieves a post by its unique identifier.

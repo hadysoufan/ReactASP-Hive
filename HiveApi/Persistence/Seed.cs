@@ -251,7 +251,7 @@ namespace Persistence
                 {
                     Name = "Product 1",
                     Description = "Description for Product 1",
-                    Price = 50,
+                    Price = 500,
                     Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMHFZjpPT1zlQDp-GmgdAwVByzVCeBxfkqFg&usqp=CAU",
                     Type = "Type 1",
                     Brand = "Brand 1",
@@ -261,7 +261,7 @@ namespace Persistence
                 {
                     Name = "Product 2",
                     Description = "Description for Product 2",
-                    Price = 40,
+                    Price = 400,
                     Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMHFZjpPT1zlQDp-GmgdAwVByzVCeBxfkqFg&usqp=CAU",
                     Type = "Type 2",
                     Brand = "Brand 2",
@@ -271,7 +271,7 @@ namespace Persistence
                 {
                     Name = "Product 3",
                     Description = "Description for Product 3",
-                    Price = 50,
+                    Price = 500,
                     Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMHFZjpPT1zlQDp-GmgdAwVByzVCeBxfkqFg&usqp=CAU",
                     Type = "Type 3",
                     Brand = "Brand 3",
@@ -281,7 +281,7 @@ namespace Persistence
                 {
                     Name = "Product 4",
                     Description = "Description for Product 4",
-                    Price = 50,
+                    Price = 500,
                     Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMHFZjpPT1zlQDp-GmgdAwVByzVCeBxfkqFg&usqp=CAU",
                     Type = "Type 4",
                     Brand = "Brand 4",
@@ -291,7 +291,7 @@ namespace Persistence
                 {
                     Name = "Product 5",
                     Description = "Description for Product 5",
-                    Price = 50,
+                    Price = 500,
                     Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMHFZjpPT1zlQDp-GmgdAwVByzVCeBxfkqFg&usqp=CAU",
                     Type = "Type 5",
                     Brand = "Brand 5",
@@ -301,7 +301,7 @@ namespace Persistence
                 {
                     Name = "Product 6",
                     Description = "Description for Product 6",
-                    Price = 50,
+                    Price = 500,
                     Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMHFZjpPT1zlQDp-GmgdAwVByzVCeBxfkqFg&usqp=CAU",
                     Type = "Type 6",
                     Brand = "Brand 6",

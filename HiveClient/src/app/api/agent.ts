@@ -2,12 +2,11 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { Activity, ActivityFormValues } from "../models/activity";
 import { User, UserFormValues } from "../models/user";
 import { store } from "../stores/store.ts";
-import { Post } from "../models/post.ts";
-import { Photo, Profile } from "../models/profile.ts";
+import { Profile } from "../models/profile.ts";
 import { Product } from "../models/products.ts";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { PhotoFormValues } from "../models/photos.ts";
+import { Photo, PhotoFormValues } from "../models/photos.ts";
+import { Basket } from "../models/basket.ts";
 /**
  * Function to introduce a delay using Promises.
  * @param {number} delay - The delay in milliseconds.
@@ -21,6 +20,7 @@ const sleep = (delay: number): Promise<void> => {
 
 // Configuring the base URL for Axios requests
 axios.defaults.baseURL = "http://localhost:5000/api";
+axios.defaults.withCredentials = true;
 
 /**
  * Axios request interceptor to include the authorization token in the headers.
@@ -40,7 +40,7 @@ axios.interceptors.response.use(
     return response;
   },
   (error: AxiosError) => {
-    const { data, status } = error.response!;
+    const { status } = error.response!;
     switch (status) {
       case 400:
         toast.error("bad request");
@@ -109,18 +109,6 @@ const Account = {
     requests.post<User>("/account/register", user),
 };
 
-/**
- * Object containing methods for interacting with 'Post' API.
- */
-// const Posts = {
-//   list: (): Promise<Post[]> => requests.get<Post[]>("/photo"),
-//   details: (id: string): Promise<Post> => requests.get<Post>(`/post/${id}`),
-//   create: (post: Post): Promise<void> => requests.post<void>("/post", post),
-//   update: (post: Post): Promise<void> =>
-//     requests.put<void>(`/post/${post.id}`, post),
-//   delete: (id: string): Promise<void> => requests.del<void>(`/post/${id}`),
-// };
-
 const Photos = {
   list: (): Promise<Photo[]> => requests.get<Photo[]>("/photo"),
   details: (id: string): Promise<Photo> => requests.get<Photo>(`/photo/${id}`),
@@ -136,6 +124,12 @@ const Products = {
   details: (id: string): Promise<Product> =>
     requests.get<Product>(`/products/${id}`),
 };
+
+const Baskets = {
+  get: (): Promise<Basket[]> => requests.get<Basket[]>('basket'),
+  addItem: (productId: number, quantity = 1) => requests.post(`basket?productId=${productId}&quantity=${quantity}`, {}),
+  removeItem: (productId: number, quantity = 1) => requests.del(`basket?productId=${productId}&quantity=${quantity}`),
+}
 
 /**
  * Object containing methods for interacting with 'Photo' API.
@@ -164,6 +158,7 @@ const agent = {
   Profiles,
   Products,
   Photos,
+  Baskets
 };
 
 export default agent;

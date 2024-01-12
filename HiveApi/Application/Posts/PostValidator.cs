@@ -16,7 +16,7 @@ namespace Application.Posts
             /// <summary>
             /// Validates that the image property of the post is not empty.
             /// </summary>
-            RuleFor(x => x.Image).NotEmpty();
+            //RuleFor(x => x.ImageFileName).NotEmpty();
 
             /// <summary>
             /// Validates that the description property of the post is not empty.

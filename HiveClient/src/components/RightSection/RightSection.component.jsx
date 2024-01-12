@@ -1,8 +1,6 @@
-// Importing React and styles
 import React from 'react';
 import '../../asset/css/hive.styles.scss';
 import './RightSection.component.styles.jsx';
-import DefaultImg from '../../asset/img/hive/default.png';
 import Profile1 from '../../asset/img/hive/profile-1.jpg';
 import Profile2 from '../../asset/img/hive/profile-2.jpg';
 

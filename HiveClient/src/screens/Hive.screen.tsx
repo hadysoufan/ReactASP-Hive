@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import HiveNav from '../components/HiveNavBar/HiveNav.component.tsx'
 import LeftSection from '../components/LeftSection/LeftSection.component.jsx'
 import MiddleSection from '../components/MiddleSection/MiddleSection.component.tsx'
@@ -7,9 +7,7 @@ import '../asset/css/hive.styles.scss'
 import HiveGlobal from '../styled/HiveGlobal.styled.js';
 import { observer } from 'mobx-react-lite';
 import { Post } from '../app/models/post.ts';
-import agent from '../app/api/agent.ts';
-import Loader from '../components/Loader/Loader.component.jsx';
-;
+
 
 interface Props {
   post: Post | undefined;
@@ -21,8 +19,7 @@ interface Props {
  * @returns {JSX.Element} The JSX representation of the Hive page.
  */
 function Hive({post}: Props) {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
+
 
   // useEffect( () => {
   //   agent.Posts.list().then(response => {

@@ -1,3 +1,4 @@
+import { Photo } from "./photos";
 import { User } from "./user";
 
 /**
@@ -14,6 +15,9 @@ export interface Profile {
   displayName: string;
   image?: string;
   bio?: string;
+  followersCount: number;
+  followingCount: number;
+  following: boolean;
   photos?: Photo[];
 }
 
@@ -41,8 +45,8 @@ export class Profile implements Profile {
  * @property {string} url - The URL of the photo.
  * @property {boolean} isMain - Indicates whether the photo is the main profile picture.
  */
-export interface Photo {
-  id: string;
-  url: string;
-  isMain: boolean;
-}
+// export interface Photo {
+//   id: string;
+//   url: string;
+//   isMain: boolean;
+// }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Product } from "../../app/models/products";
 import {
   Avatar,
@@ -11,16 +11,25 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-
+import agent from "../../app/api/agent.ts";
+import { LoadingButton } from "@mui/lab";
 
 interface Props {
   product: Product;
 }
 
 function ProductsCard({ product }: Props) {
+  const [loading, setLoading] = useState(false);
+
+  function handleAddItem(productId: number) {
+    setLoading(true);
+    agent.Baskets.addItem(productId)
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false));
+  }
+
   return (
     <>
-
       <Card sx={{ maxWidth: 345 }}>
         <CardHeader
           avatar={
@@ -52,9 +61,14 @@ function ProductsCard({ product }: Props) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" sx={{ fontWeight: "700", color: "#ff8906" }}>
+          <LoadingButton
+            loading={loading}
+            onClick={() => handleAddItem(product.id)}
+            size="small"
+            sx={{ fontWeight: "700", color: "#ff8906" }}
+          >
             Add to card
-          </Button>
+          </LoadingButton>
           <Button
             component={Link}
             to={`/hive/product/${product.id}`}

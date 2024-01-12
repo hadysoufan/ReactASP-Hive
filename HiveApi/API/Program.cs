@@ -47,12 +47,14 @@ app.UseHttpsRedirection();
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 
-app.UseStaticFiles(new StaticFileOptions
-{
-FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "Images")),
-RequestPath = "/images"
-});
+app.UseStaticFiles();
+
+//app.UseStaticFiles(new StaticFileOptions
+//{
+//FileProvider = new PhysicalFileProvider(
+//        Path.Combine(Directory.GetCurrentDirectory(), "Images")),
+//RequestPath = "/images"
+//});
 
 
 

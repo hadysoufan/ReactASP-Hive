@@ -18,9 +18,8 @@ namespace API.DTOs
         /// Gets or sets the password of the user.
         /// </summary>
         [Required]
-        //[RegularExpression("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$", ErrorMessage = "Password must contain at least 1 uppercase letter and 1 digit.")]
+        [RegularExpression("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$", ErrorMessage = "Password must contain at least 1 uppercase letter and 1 digit.")]
         public string Password { get; set; }
-
         /// <summary>
         /// Gets or sets the display name of the user.
         /// </summary>

@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as User from "../../screens/UserProfile/UserProfile.screen.styles.jsx";
 import { observer } from 'mobx-react-lite';
 import { Profile } from '../../app/models/profile.ts';
-import { useStore } from '../../app/stores/store.ts';
-import { Button } from 'semantic-ui-react';
 
 interface Props{
     profile: Profile
@@ -16,12 +14,8 @@ interface Props{
  * @param {Profile} props.profile - The user profile for which to display photos.
  */
 function ProfilePhotos({profile}: Props) {
-  const {profileStore: {isCurrentUser, uploadPhoto, uploading}} = useStore();
-  const [addPhotoMode, setAddPhotoMode] = useState(false);
 
-  function handlePhotoUpload(file: Blob){
-    uploadPhoto(file).then(() => setAddPhotoMode(false))
-  }
+
 
   if (!profile || !profile.photos) {
     return null;
@@ -33,7 +27,7 @@ function ProfilePhotos({profile}: Props) {
         <User.UserPageWrapper>
 
         {profile.photos?.map(photo => (
-            <User.UserPageInner>
+            <User.UserPageInner key={photo.id}>
             <User.ImageBlock id="imgblock1">
               <User.Block key={photo.id}>
                 <User.Img

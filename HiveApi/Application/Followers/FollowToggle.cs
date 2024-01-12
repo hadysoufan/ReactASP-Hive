@@ -51,13 +51,17 @@ namespace Application.Followers
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                 var observer = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
+                if (observer == null)
+                {
+                    return Result<Unit>.Failure("Observer user not found");
+                }
 
                 var target = await _context.Users.FirstOrDefaultAsync(x => x.UserName == request.TargetUsername);
-
-                if (target is null)
+                if (target == null)
                 {
                     return Result<Unit>.Failure("Target user not found");
                 }
+
 
                 var following = await _context.UserFollowings.FindAsync(observer.Id, target.Id);
 
@@ -79,9 +83,6 @@ namespace Application.Followers
                 var success = await _context.SaveChangesAsync() > 0;
 
                 if (success) return Result<Unit>.Success(Unit.Value);
-
-                Console.WriteLine($"Observer ID: {observer?.Id}");
-                Console.WriteLine($"Target ID: {target?.Id}");
 
                 return Result<Unit>.Failure("Failed to update following");
             }

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { Segment, Item, Button } from 'semantic-ui-react';
-import { Post } from '../../app/models/post';
 import { useStore } from '../../app/stores/store.ts';
 import { Photo } from '../../app/models/photos.ts';
 

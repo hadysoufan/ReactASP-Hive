@@ -4,7 +4,7 @@ export interface Photo {
   isMain: boolean;
   owner: string;
   description: string;
-  date: string ;
+  date?: Date ;
 }
 
 export class PhotoFormValues {
